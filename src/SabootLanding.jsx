@@ -400,7 +400,7 @@ const helpTag = {
 const features = [
   { eyebrow: "Record", title: "Scan the label. The camera does the rest.",
     body: "Put a phone on a stand above the packing table. Scan the courier barcode and recording starts. Scan the next parcel and the last clip saves itself. Packers keep both hands on the box.",
-    ticks: ["Any Android phone or a USB webcam", "Order number, time and fingerprint stamped on every clip", "Keeps recording through power and internet cuts, uploads later"], visual: <LiveCapture /> },
+    ticks: ["Any Android phone or a USB webcam", "Order number, time and fingerprint stamped on every clip, up to 60 seconds each", "Compressed on the phone and uploaded straight to private storage, resuming after power or internet cuts"], visual: <LiveCapture /> },
   { eyebrow: "Check returns", title: "Open every return on camera.",
     body: "Scan a returned parcel and record the opening. Saboot puts the item list from the packing clip next to it, so a missing earbud or a swapped product shows up in seconds.",
     ticks: ["What you sent next to what came back", "One tap: OK, wrong item, missing parts, damaged, empty box", "Batch mode for a whole bag of courier returns"], visual: <ReturnCompare /> },
@@ -445,6 +445,9 @@ const faqs = [
   ["I sell on Instagram and WhatsApp. Is this for me?", "Yes. Send the packing clip to a customer who disputes a parcel, and file courier claims for lost or damaged parcels on time."],
   ["Will you file the claim for me?", "No. Daraz and the couriers do not offer a way for outside tools to file claims, so you submit each claim yourself. Saboot prepares the evidence and tells you the deadline."],
   ["Does Saboot connect to my courier or Daraz account?", "Not in the first version. You scan the label or upload your booking or order sheet. Daraz and some couriers offer merchant APIs for orders and tracking, and we plan optional connections using your own API keys later."],
+  ["Where are my videos stored?", "In private cloud storage run on Supabase, encrypted at rest. Only your store's logins can see them. A clip you share goes out as a private link that stops working after 30 days."],
+  ["Why is each clip capped at 60 seconds?", "A minute covers packing one parcel from empty box to sealed label. The phone shrinks each clip to about 720p before upload, so it sends quickly on mobile data and keeps storage costs, and our prices, low."],
+  ["What happens if I go over my parcel limit?", "Recording pauses for the rest of the month and your existing clips and claims stay available. Move up a plan at any time. If you pack more than 800 parcels a month, contact us."],
   ["How long are videos kept?", "30 days on Free, 180 days on Standard and a full year on Growth. Videos linked to an open claim are kept until it closes."],
 ];
 
@@ -750,7 +753,7 @@ export default function SabootLanding() {
               </div>
             ))}
           </div>
-          <p style={{ fontSize: 13, marginTop: 16 }}>Planned prices for launch. Payment methods will be confirmed before billing starts. Prices exclude tax.</p>
+          <p style={{ fontSize: 13, marginTop: 16 }}>Planned prices for launch. Each parcel covers one packing clip of up to 60 seconds and, if it comes back, one return clip. Clips are kept for the storage period of your plan, and longer while a claim is open. Payment methods will be confirmed before billing starts. Prices exclude tax.</p>
         </div>
       </section>
 
