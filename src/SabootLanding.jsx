@@ -134,35 +134,35 @@ body { background: var(--bg); }
 const T = {
   en: {
     nav: ["How it works", "Features", "Calculator", "Pricing", "FAQ"],
-    start: "Start free",
+    start: "Join early access",
     eyebrow: "For Pakistani online sellers",
     h1: "Stop paying for returns that weren't your fault.",
     lead: "The customer says it was defective. The box comes back empty, swapped or missing parts. Saboot records every parcel you pack and every return you open, then hands you the proof to win the claim.",
-    cta1: "Start free · 50 parcels a month",
+    cta1: "Join early access",
     cta2: "Work out your losses",
-    works: "Works with Daraz · TCS · Leopards · PostEx · Trax · your own store",
+    works: "Tracks published claim rules for Daraz, TCS, Leopards and PostEx. No official partnership with any of them.",
     probEyebrow: "The problem",
     probH: "No video, no claim. Short deadline, no second chance.",
     probP: "Marketplaces and couriers put the burden of proof on you. Without a packing video and a complete claim filed on time, the loss is yours.",
     howH: "Four steps from packing table to payout.",
     finalH: "Your next bad return is already on its way.",
-    finalP: "Start recording today. Free for your first 50 parcels every month. No card needed.",
+    finalP: "Saboot is in development. Join early access and we will set up your first packing station with you when the pilot opens.",
   },
   ur: {
     nav: ["طریقہ کار", "خصوصیات", "حساب", "قیمت", "سوالات"],
-    start: "مفت شروع کریں",
+    start: "شامل ہوں",
     eyebrow: "پاکستانی آن لائن سیلرز کے لیے",
     h1: "جن ریٹرنز میں آپ کی غلطی نہیں، ان کا نقصان اب نہیں۔",
     lead: "کسٹمر کہتا ہے چیز خراب تھی۔ پارسل خالی، بدلا ہوا یا ادھورا واپس آتا ہے۔ ثبوت ہر پیکنگ اور ہر ریٹرن کی ویڈیو بناتا ہے اور کلیم جیتنے کے لیے پورا ثبوت تیار کر دیتا ہے۔",
-    cta1: "مفت شروع کریں · ہر مہینے ۵۰ پارسل",
+    cta1: "ابتدائی رسائی کے لیے شامل ہوں",
     cta2: "اپنا نقصان معلوم کریں",
-    works: "دراز · ٹی سی ایس · لیپرڈز · پوسٹ ایکس · ٹریکس · آپ کا اپنا اسٹور",
+    works: "دراز، ٹی سی ایس، لیپرڈز اور پوسٹ ایکس کے شائع شدہ کلیم قواعد۔ کسی کمپنی سے سرکاری شراکت نہیں۔",
     probEyebrow: "مسئلہ",
     probH: "ویڈیو نہیں تو کلیم نہیں۔ وقت کم، دوسرا موقع نہیں۔",
     probP: "مارکیٹ پلیس اور کوریئر ثبوت کی ذمہ داری آپ پر ڈالتے ہیں۔ پیکنگ ویڈیو اور وقت پر مکمل کلیم کے بغیر نقصان آپ کا ہے۔",
     howH: "پیکنگ ٹیبل سے رقم کی واپسی تک چار قدم۔",
     finalH: "آپ کا اگلا خراب ریٹرن راستے میں ہے۔",
-    finalP: "آج ہی ریکارڈنگ شروع کریں۔ ہر مہینے پہلے ۵۰ پارسل مفت۔ کارڈ کی ضرورت نہیں۔",
+    finalP: "ثبوت ابھی تیاری میں ہے۔ ابتدائی رسائی کے لیے شامل ہوں، پائلٹ شروع ہونے پر ہم آپ کے ساتھ پہلا پیکنگ اسٹیشن لگائیں گے۔",
   },
 };
 
@@ -239,7 +239,7 @@ const ReturnCompare = () => (
       ))}
     </div>
     <div style={{ marginTop: 14, padding: 12, borderRadius: 10, background: "var(--warn-soft)", color: "var(--warn)", fontSize: 14, fontWeight: 700 }}>
-      Claim opened automatically · Missing items · Daraz
+      Claim record opened in Saboot · Missing items
     </div>
   </div>
 );
@@ -247,7 +247,7 @@ const ReturnCompare = () => (
 const DeadlineList = () => (
   <div className="panel">
     <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, color: "var(--sub)", marginBottom: 6 }}><span>Claims due</span><span>Today: 2 Nov</span></div>
-    {[["Daraz", "DZ-4482190 · X-form", "Due today", "var(--warn)", "var(--warn-soft)"],
+    {[["Daraz", "DZ-4482190 · return", "Due today", "var(--warn)", "var(--warn-soft)"],
       ["Leopards", "LP-55821 · damaged", "2 days left", "var(--amber)", "var(--amber-soft)"],
       ["PostEx", "PX-118402 · lost", "9 days left", "var(--brand)", "var(--brand-soft)"],
       ["TCS", "7781 2290 4410 · lost", "21 days left", "var(--brand)", "var(--brand-soft)"]].map(([p, id, d, fg, bg]) => (
@@ -271,7 +271,7 @@ const BundlePreview = () => (
       <li>Return-opening video · fingerprint · timestamp</li>
       <li>Side-by-side item checklist</li>
       <li>Label and weight photos</li>
-      <li>Seller statement, pre-filled for the Daraz X-form</li>
+      <li>Seller statement you can paste into a Daraz or courier claim</li>
       <li>How anyone can verify the files</li>
     </ol>
     <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -380,9 +380,9 @@ const PakBanner = ({ t }) => {
 
 /* Problems local retailers face, with what Saboot does about each. */
 const issues = [
-  { fig: "94.5%", what: "of orders are cash on delivery", why: "Buyers can refuse at the door or return at little cost to themselves.", src: ["OrderNation, June 2026", "https://www.ordernation.com/blogs/research/state-of-online-shopping-pakistan-2026"], help: "solves", how: "Every parcel has a packing clip, so a false 'arrived broken' claim has an answer." },
+  { fig: "94.5%", what: "of orders are cash on delivery", why: "Buyers can refuse at the door or return at little cost to themselves.", src: ["OrderNation, June 2026", "https://www.ordernation.com/blogs/research/state-of-online-shopping-pakistan-2026"], help: "solves", how: "Parcels you record have a packing clip, so a false 'arrived broken' claim has an answer." },
   { fig: "19.4%", what: "of COD parcels return undelivered", why: "You pay courier charges both ways and earn nothing on the sale.", src: ["OrderNation, June 2026", "https://www.ordernation.com/blogs/research/state-of-online-shopping-pakistan-2026"], help: "helps", how: "Return check shows which refused parcels came back opened, tampered or short." },
-  { fig: "~30%", what: "of item value can be deducted when a return fails Daraz quality check", why: "A swapped or stripped return can cost you the item and a penalty.", src: ["Third-party commission guide, 2026", "https://digiteazy.com/daraz-commission-rate-pakistan/"], help: "solves", how: "The item checklist on camera matches what Daraz checks, ready for the X-form." },
+  { fig: "~30%", what: "of item value is reported as the deduction when a return fails Daraz quality check", why: "A swapped or stripped return can cost you the item and a penalty.", src: ["Third-party commission guide, 2026", "https://digiteazy.com/daraz-commission-rate-pakistan/"], help: "solves", how: "The item checklist on camera follows the items Daraz's return policy lists." },
   { fig: "3–30 days", what: "to claim, depending on who you claim from", why: "Priceoye 3 days, Leopards 10, TCS and PostEx 30. Miss it and the claim is gone.", src: ["Published policies", "https://pakera.pk/claim-lost-or-damaged-courier-parcel-pakistan/"], help: "solves", how: "Each claim gets its own clock and a WhatsApp alert on the day the bad return arrives." },
   { fig: "7–14 days", what: "some couriers hold your COD cash before paying out", why: "Money for delivered parcels sits with the courier while you restock.", src: ["Logistics guide, 2026", "https://theeasyfinance.com/e-commerce-logistics-and-shipping-in-pakistan/"], help: "next", how: "Planned: match courier payout sheets against your recorded parcels." },
   { fig: "2% vs 1%", what: "tax withheld on COD versus digital payments", why: "COD costs you more, and since July 2025 marketplaces and couriers need you registered with FBR.", src: ["Tax guides, 2025–26", "https://pakera.pk/ecommerce-tax-register-online-sellers-pakistan/"], help: "no", how: "Outside Saboot. Your monthly report gives your accountant clean parcel and return counts." },
@@ -405,10 +405,10 @@ const features = [
     body: "Scan a returned parcel and record the opening. Saboot puts the item list from the packing clip next to it, so a missing earbud or a swapped product shows up in seconds.",
     ticks: ["What you sent next to what came back", "One tap: OK, wrong item, missing parts, damaged, empty box", "Batch mode for a whole bag of courier returns"], visual: <ReturnCompare /> },
   { eyebrow: "Deadlines", title: "Every claim, every deadline, one list.",
-    body: "Daraz, TCS, Leopards, PostEx and Trax each have their own claim window. Saboot starts the clock the moment a bad return is logged and messages you on WhatsApp before time runs out.",
+    body: "Daraz, TCS, Leopards and PostEx each publish their own claim rules. Saboot starts the clock the moment a bad return is logged and messages you on WhatsApp before time runs out.",
     ticks: ["Claim windows for each marketplace and courier", "Checklist of the evidence each one asks for", "Alert on the same day a bad return arrives"], visual: <DeadlineList /> },
-  { eyebrow: "Send proof", title: "One file that answers every question support asks.",
-    body: "Each claim gets an evidence bundle: both videos with their fingerprints and timestamps, the item checklist, label photos and a statement ready to paste into the Daraz X-form or a courier claim email.",
+  { eyebrow: "Send proof", title: "All your evidence for a claim in one file.",
+    body: "Each claim gets an evidence bundle: both videos with their fingerprints and timestamps, the item checklist, label photos and a statement you can paste into a Daraz Seller Support claim or a courier claim email. You submit the claim yourself.",
     ticks: ["No more screenshots and voice notes", "A verification page explains the fingerprint", "Private links that expire"], visual: <BundlePreview /> },
   { eyebrow: "Results", title: "See which returns cost you, and where from.",
     body: "Track parcels recorded, bad returns, claims filed and rupees recovered each month. Spot the courier, city or product that keeps causing trouble.",
@@ -416,21 +416,21 @@ const features = [
 ];
 
 const audiences = {
-  daraz: { tab: "Daraz sellers", h: "Win more Daraz return claims.",
+  daraz: { tab: "Daraz sellers", h: "Back up your Daraz return claims with video.",
     p: "Daraz checks every return at its quality-control centre and asks for tags, manuals, warranty cards, freebies, the invoice and the original box. When a buyer keeps the good unit or strips the accessories, you need to show exactly what left your hands.",
-    pts: ["Packing clip shows every item Daraz's return policy lists", "Evidence bundle matches the Seller Support X-form", "Track claims as Under review, Approved or Rejected"] },
+    pts: ["Packing clip shows every item Daraz's return policy lists", "Evidence bundle to attach to your Seller Support claim", "Log each claim's outcome yourself: under review, approved or rejected"] },
   social: { tab: "Instagram & WhatsApp sellers", h: "Settle 'it arrived broken' in one message.",
     p: "You ship with your own courier account and handle customers yourself. Send a buyer the packing clip when they complain, and file courier claims for lost or damaged parcels before the window closes.",
-    pts: ["Share a private packing clip link on WhatsApp", "Courier claim deadlines for TCS, Leopards, PostEx and Trax", "Works without any marketplace account"] },
+    pts: ["Share a private packing clip link on WhatsApp", "Courier claim deadlines where the courier publishes them", "Works without any marketplace account"] },
   brand: { tab: "Brands with a warehouse", h: "One record for every parcel, every packer.",
     p: "Several packing stations, hundreds of orders a day. Give each packer a login, run fixed webcams with barcode scanners, and see which station, courier or SKU causes the most disputes.",
-    pts: ["Multiple stations and packer logins", "Order import from Daraz exports or your store", "Yearly video storage for long warranty disputes"] },
+    pts: ["Multiple stations and packer logins", "Order import from a Daraz or store CSV export", "Yearly video storage for long warranty disputes"] },
 };
 
 const daraZList = ["Product unused, with no flaws", "Original tags", "Manuals", "Warranty card", "Free gifts", "Invoice", "All accessories", "Original undamaged box"];
 
 const rules = [
-  ["Daraz", "14 days from delivery (buyer return window)", "Return goes through Daraz quality check. Seller claims through Seller Support X-form.", "https://www.daraz.pk/return-policy/"],
+  ["Daraz", "14 days from delivery (buyer return window)", "Return goes through Daraz quality check. Seller claims go through Seller Support.", "https://www.daraz.pk/return-policy/"],
   ["Priceoye", "3 days from delivery", "Full unboxing video plus video of the fault. Priceoye records a packing video for every order.", "https://priceoye.pk/return-policy"],
   ["Leopards", "10 days from the incident", "Written claim within 30 days of booking. Insurance only if requested.", "https://pakera.pk/claim-lost-or-damaged-courier-parcel-pakistan/"],
   ["TCS", "30 days from booking", "Written claim with tracking number, invoice and proof of value.", "https://pakera.pk/claim-lost-or-damaged-courier-parcel-pakistan/"],
@@ -438,12 +438,13 @@ const rules = [
 ];
 
 const faqs = [
-  ["Does Daraz accept these videos?", "Daraz asks for proof on disputed returns through its Seller Support X-form. Saboot gives you a continuous, uncut, timestamped clip tied to the order, plus a statement in the format the form asks for. The decision stays with Daraz."],
+  ["Does Daraz accept these videos?", "Daraz seller claims go through a Seller Support form that asks for proof. Saboot gives you a continuous, uncut, timestamped clip tied to the order and a written statement. We cannot promise Daraz or any courier will accept a claim. The decision is theirs."],
   ["Will the video hold up if it goes further?", "Pakistani law accepts electronic records as evidence, and courts look for proof a video is genuine and unedited. Each clip is continuous, stamped with the time and order number, and fingerprinted when it is saved, so any change would show."],
   ["Do I need special cameras?", "No. A phone on a stand or a basic USB webcam is enough. A barcode scanner makes it faster, but the phone camera can read labels too."],
   ["What if the internet or power goes out?", "Clips save on the device and upload when the connection is back."],
   ["I sell on Instagram and WhatsApp. Is this for me?", "Yes. Send the packing clip to a customer who disputes a parcel, and file courier claims for lost or damaged parcels on time."],
-  ["Will you file the claim for me?", "Not yet. Saboot prepares everything and tells you where and when to send it. A done-for-you service is planned."],
+  ["Will you file the claim for me?", "No. Daraz and the couriers do not offer a way for outside tools to file claims, so you submit each claim yourself. Saboot prepares the evidence and tells you the deadline."],
+  ["Does Saboot connect to my courier or Daraz account?", "Not in the first version. You scan the label or upload your booking or order sheet. Daraz and some couriers offer merchant APIs for orders and tracking, and we plan optional connections using your own API keys later."],
   ["How long are videos kept?", "30 days on Free, 180 days on Standard and a full year on Growth. Videos linked to an open claim are kept until it closes."],
 ];
 
@@ -623,7 +624,7 @@ export default function SabootLanding() {
               ))}</tbody>
             </table>
           </div>
-          <p style={{ fontSize: 13, marginTop: 14 }}>Trax publishes no claim window, so Saboot uses a safe default and flags it. Rules are checked regularly and updated without an app update.</p>
+          <p style={{ fontSize: 13, marginTop: 14 }}>We found no published claim window for Trax, so it is not listed. Policies change. Check the company's current terms before you rely on a deadline.</p>
         </div>
       </section>
 
@@ -650,7 +651,7 @@ export default function SabootLanding() {
                 Standard plan costs <b>Rs 1,999</b> a month. {recoverable > 1999 ? <>That is about <b>{Math.max(1, Math.round(recoverable / 1999))}×</b> back.</> : <>At your volume, the Free plan is the better fit.</>}
               </div>
             </div>
-            <p style={{ fontSize: 12, marginTop: 14, marginBottom: 0 }}>An estimate, not a promise. Real outcomes depend on Daraz and courier decisions.</p>
+            <p style={{ fontSize: 12, marginTop: 14, marginBottom: 0 }}>An estimate, not a promise. The 6 in 10 win rate is an assumption until our pilot gives real numbers. Outcomes depend on Daraz and courier decisions.</p>
           </div>
         </div>
       </section>
@@ -674,7 +675,7 @@ export default function SabootLanding() {
           <div className="row grid2 flip">
             <div className="text">
               <span className="eyebrow">Setup</span>
-              <h2>Running in 15 minutes with kit you can buy at Hall Road.</h2>
+              <h2>Set up with a phone and a stand.</h2>
               <p style={{ fontSize: 17 }}>No CCTV contract and no installer. Any of these setups works.</p>
               <ul className="ticks">
                 <li>Starter: an Android phone on a stand. The phone reads the label.</li>
@@ -728,7 +729,7 @@ export default function SabootLanding() {
             <div>
               <span className="eyebrow">Pricing</span>
               <h2>One saved return pays for the month.</h2>
-              <p style={{ margin: 0 }}>Flat price. We never take a share of what you recover.</p>
+              <p style={{ margin: 0 }}>Planned flat price. We will not take a share of what you recover.</p>
             </div>
             <div className="tabs" role="tablist" aria-label="Billing period">
               <button role="tab" className="tab" aria-selected={!yearly} onClick={() => setYearly(false)}>Monthly</button>
@@ -738,7 +739,7 @@ export default function SabootLanding() {
           <div className="grid3" style={{ marginTop: 36 }} dir="ltr">
             {[["Free", 0, "50 parcels a month", ["Packing and return videos", "Claim tracker", "Evidence PDF", "30-day storage"], false],
               ["Standard", 1999, "500 parcels a month", ["Everything in Free", "WhatsApp deadline alerts", "Item checklists per product", "Dashboard", "3 packer logins", "180-day storage"], true],
-              ["Growth", 4999, "2,000 parcels a month", ["Everything in Standard", "10 packer logins and stations", "Daraz order import", "1-year storage", "Priority WhatsApp support"], false]].map(([n, m, q, items, hot]) => (
+              ["Growth", 4999, "2,000 parcels a month", ["Everything in Standard", "10 packer logins and stations", "Order import by CSV", "1-year storage", "Priority WhatsApp support"], false]].map(([n, m, q, items, hot]) => (
               <div key={n} className="tile" style={hot ? { border: "2px solid var(--brand)", position: "relative" } : { position: "relative" }}>
                 {hot && <span className="pill" style={{ position: "absolute", top: -12, insetInlineStart: 22, background: "var(--brand)", color: "var(--on-brand)" }}>Most popular</span>}
                 <h3>{n}</h3>
@@ -749,7 +750,7 @@ export default function SabootLanding() {
               </div>
             ))}
           </div>
-          <p style={{ fontSize: 13, marginTop: 16 }}>Pay by JazzCash, Easypaisa or bank transfer. Prices exclude tax.</p>
+          <p style={{ fontSize: 13, marginTop: 16 }}>Planned prices for launch. Payment methods will be confirmed before billing starts. Prices exclude tax.</p>
         </div>
       </section>
 
@@ -803,7 +804,7 @@ export default function SabootLanding() {
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 12 }}>
             <span>© 2026 Saboot · Made in Pakistan</span>
-            <span>Not affiliated with Daraz, Priceoye or any courier.</span>
+            <span>Not affiliated with, endorsed by or integrated with Daraz, Priceoye, TCS, Leopards, PostEx or Trax.</span>
           </div>
         </div>
       </footer>
