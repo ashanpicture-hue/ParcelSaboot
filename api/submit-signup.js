@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     // Create Supabase client with SERVICE ROLE KEY (server-side only)
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('early_access_signups')
       .insert([{ store_name, whatsapp, sells_on }]);
 
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Database error' });
     }
 
-    return res.status(200).json({ success: true, id: data[0].id });
+    return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Server error:', err);
     return res.status(500).json({ error: 'Internal server error' });
