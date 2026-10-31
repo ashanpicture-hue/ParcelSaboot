@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { supabase } from './supabase';
 
 /*
   Saboot (ثبوت) — marketing landing page, v2
@@ -513,6 +514,8 @@ export default function SabootLanding() {
   const [open, setOpen] = useState(0);
   const [yearly, setYearly] = useState(false);
   const [sent, setSent] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState(null);
   const [calc, setCalc] = useState({ orders: 400, ret: 20, bad: 15, value: 3500 });
   const t = T[lang];
   const rtl = lang === "ur";
@@ -547,6 +550,39 @@ export default function SabootLanding() {
   const fillFor = (v, min, max) => `${((v - min) / (max - min)) * 100}%`;
   const rangeStyle = (v, min, max) => ({ "--fill": fillFor(v, min, max) });
   const price = (m) => (m === 0 ? "Rs 0" : rs(yearly ? m * 10 / 12 : m));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError(null);
+
+    const store = document.getElementById('store')?.value || '';
+    const phone = document.getElementById('phone')?.value || '';
+    const volume = document.getElementById('volume')?.value || '';
+
+    try {
+      const { error } = await supabase
+        .from('early_access_signups')
+        .insert([{ store_name: store, whatsapp: phone, sells_on: volume, created_at: new Date().toISOString() }]);
+
+      if (error) throw error;
+
+      // GA4 event tracking
+      if (typeof window.gtag !== 'undefined') {
+        window.gtag('event', 'early_access_signup', {
+          method: 'form',
+          sells_on: volume,
+          store_name: store
+        });
+      }
+
+      setSent(true);
+      setSubmitting(false);
+    } catch (err) {
+      setSubmitError(err.message);
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="sb" dir={rtl ? "rtl" : "ltr"} lang={rtl ? "ur" : "en"}>
@@ -849,11 +885,17 @@ export default function SabootLanding() {
             <h2>{t.finalH}</h2>
             <p style={{ fontSize: 18 }}>{t.finalP}</p>
           </div>
-          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 16, padding: 22, display: "grid", gap: 14 }} dir="ltr">
+          <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 16, padding: 22, display: "grid", gap: 14 }} dir="ltr">
             {sent ? (
               <div style={{ padding: "24px 4px" }}>
                 <h3 style={{ color: "var(--night-ink)" }}>You're on the list.</h3>
                 <p style={{ margin: 0 }}>We'll message you on WhatsApp to set up your first packing station.</p>
+              </div>
+            ) : (submitError ? (
+              <div style={{ padding: "24px 4px", color: "var(--night-ink)" }}>
+                <h3 style={{ color: "var(--brand-soft)" }}>Something went wrong.</h3>
+                <p style={{ margin: 0 }}>{submitError}</p>
+                <button className="btn btn-p" onClick={() => setSubmitError(null)}>Try again</button>
               </div>
             ) : (<>
               <label className="f" htmlFor="store" style={{ color: "var(--night-ink)" }}>Store name<input id="store" className="field" required placeholder="e.g. Karachi Gadgets" /></label>
@@ -861,8 +903,9 @@ export default function SabootLanding() {
               <label className="f" htmlFor="volume" style={{ color: "var(--night-ink)" }}>Where do you sell?
                 <select id="volume" className="field" defaultValue="daraz"><option value="daraz">Daraz</option><option value="social">Instagram / WhatsApp</option><option value="site">My own website</option><option value="all">More than one</option></select>
               </label>
-              <button className="btn btn-p" type="submit">Get early access</button>
-            </>)}
+              <button className="btn btn-p" type="submit" disabled={submitting}>{submitting ? 'Submitting...' : 'Get early access'}</button>
+            </>)
+          )}
           </form>
         </div>
       </section>
