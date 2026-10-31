@@ -27,16 +27,28 @@ body { background: var(--bg); }
 .sb a { color: inherit; }
 .sb :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
 .sb .wrap { max-width: 1140px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
-.sb .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 0; cursor: pointer; font-family: inherit; }
-.sb .btn-p { background: var(--brand); color: var(--on-brand); }
-.sb .btn-p:hover { filter: brightness(.93); }
+.sb .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 0; cursor: pointer; font-family: inherit; transition: transform .18s ease, box-shadow .18s ease, filter .18s ease, background-color .18s ease, border-color .18s ease; }
+.sb .btn-p { background: var(--brand); color: var(--on-brand); box-shadow: 0 1px 2px rgba(10,40,25,.18); }
+.sb .btn-p:hover { filter: brightness(1.08) saturate(1.06); transform: translateY(-1px); box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--brand) 60%, transparent); }
+.sb .btn:active { transform: translateY(0) scale(.98); box-shadow: none; }
+.sb .btn-g:hover { border-color: var(--brand); color: var(--brand); background: color-mix(in srgb, var(--brand) 6%, transparent); }
 .sb .btn-g { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-.sb .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
-.sb h1 { font-size: clamp(34px, 5vw, 58px); line-height: 1.06; margin: 14px 0 18px; letter-spacing: -.025em; }
-.sb h2 { font-size: clamp(26px, 3.4vw, 40px); line-height: 1.12; margin: 10px 0 14px; letter-spacing: -.015em; }
-.sb h3 { font-size: 20px; margin: 0 0 8px; }
+.sb h1 { font-size: clamp(34px, 5vw, 58px); line-height: 1.06; margin: 14px 0 18px; letter-spacing: -.025em; text-wrap: balance; }
+.sb h2 { font-size: clamp(26px, 3.4vw, 40px); line-height: 1.12; margin: 10px 0 14px; letter-spacing: -.015em; text-wrap: balance; }
+.sb h3 { font-size: 20px; margin: 0 0 8px; text-wrap: balance; }
 .sb p { margin: 0 0 14px; color: var(--sub); max-width: 62ch; }
-.sb section { padding-block: 88px; }
+.sb .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); display: inline-flex; align-items: center; gap: 10px; }
+.sb .eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--brand); }
+.sb h2 + .eyebrow, .sb .eyebrow:only-child { display: block; } .sb .eyebrow:only-child::before { display: none; }
+.sb .grad { background: linear-gradient(100deg, var(--brand) 10%, var(--pk-green-2) 55%, var(--brand) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sb .display-num { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.sb section { padding-block: 88px; scroll-margin-top: 78px; }
+.sb html { scroll-behavior: smooth; }
+/* Scroll-reveal: sections fade-and-rise once as they enter the viewport (JS adds .in). */
+.sb .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.8,.36,1); }
+.sb .reveal.in { opacity: 1; transform: none; }
+.sb .reveal.d1 { transition-delay: .08s; } .sb .reveal.d2 { transition-delay: .16s; } .sb .reveal.d3 { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) { .sb .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 .sb .band { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .sb .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 .sb .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -48,8 +60,17 @@ body { background: var(--bg); }
 .sb .ticks li { padding-inline-start: 28px; position: relative; color: var(--ink); }
 .sb .ticks li::before { content: ""; position: absolute; inset-inline-start: 0; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--brand-soft); box-shadow: inset 0 0 0 5px var(--brand); }
 .sb[dir="rtl"] .ticks li::before { top: 12px; }
-.sb .panel { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: 0 24px 60px -36px rgba(15,60,40,.45); }
-.sb .tile { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+.sb .panel { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: 0 1px 2px rgba(15,60,40,.05), 0 24px 60px -36px rgba(15,60,40,.45); }
+.sb .tile { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; transform-style: preserve-3d; }
+.sb .tile:hover { transform: translateY(-6px) rotateX(2deg); border-color: color-mix(in srgb, var(--brand) 35%, var(--line)); box-shadow: 0 26px 52px -26px rgba(15,60,40,.48), 0 8px 16px -8px rgba(0,0,0,.08); }
+.sb .card3d { perspective: 900px; }
+.sb .card3d-inner { transition: transform .45s cubic-bezier(.22,.8,.36,1); transform-style: preserve-3d; }
+.sb .card3d:hover .card3d-inner { transform: rotateY(8deg) translateZ(10px); }
+.sb .parallax { position: relative; isolation: isolate; }
+.sb .parallax > * { transform-style: preserve-3d; transition: transform .5s cubic-bezier(.22,.8,.36,1); will-change: transform; }
+.sb .parallax .deep { transform: translateZ(-10px); opacity: .85; }
+.sb .parallax .high { transform: translateZ(6px); }
+.sb .glass { background: color-mix(in srgb, var(--card) 78%, transparent); border: 1px solid color-mix(in srgb, var(--line) 55%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .sb .big { display: block; font-family: var(--display); font-size: 32px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .sb .pill { display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
 .sb .mono { font-family: var(--mono); }
@@ -58,12 +79,20 @@ body { background: var(--bg); }
 .sb th, .sb td { padding: 14px 12px; border-bottom: 1px solid var(--line); text-align: start; vertical-align: top; }
 .sb th { font-size: 13px; color: var(--sub); font-weight: 600; }
 .sb .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-.sb .tab { padding: 10px 16px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+.sb .tab { padding: 10px 16px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease, transform .18s ease; }
+.sb .tab:hover:not([aria-selected="true"]) { border-color: color-mix(in srgb, var(--brand) 45%, var(--line)); background: color-mix(in srgb, var(--brand) 6%, var(--card)); color: var(--brand); }
+.sb .tab:active { transform: scale(.96); }
 .sb .tab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .sb .faq button { width: 100%; text-align: start; background: none; border: 0; padding: 18px 0; font: inherit; font-size: 17px; font-weight: 600; color: var(--ink); cursor: pointer; display: flex; justify-content: space-between; gap: 16px; }
 .sb .faq > div { border-bottom: 1px solid var(--line); }
 .sb label.f { display: grid; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
-.sb input[type=range] { width: 100%; accent-color: var(--brand); }
+.sb input[type=range] { width: 100%; -webkit-appearance: none; appearance: none; height: 26px; background: transparent; cursor: pointer; }
+.sb input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 99px; background: linear-gradient(90deg, var(--brand) 0 var(--fill, 50%), var(--line) var(--fill, 50%)); }
+.sb input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; margin-top: -7px; border-radius: 50%; background: var(--brand); border: 3px solid var(--card); box-shadow: 0 1px 4px rgba(15,60,40,.4), 0 0 0 1px var(--line); transition: transform .15s ease, box-shadow .15s ease; }
+.sb input[type=range]:hover::-webkit-slider-thumb, .sb input[type=range]:focus-visible::-webkit-slider-thumb { transform: scale(1.15); box-shadow: 0 2px 8px rgba(15,60,40,.45), 0 0 0 6px color-mix(in srgb, var(--brand) 18%, transparent); }
+.sb input[type=range]::-moz-range-track { height: 6px; border-radius: 99px; background: var(--line); }
+.sb input[type=range]::-moz-range-progress { height: 6px; border-radius: 99px; background: var(--brand); }
+.sb input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--brand); border: 3px solid var(--card); box-shadow: 0 1px 4px rgba(15,60,40,.4); }
 .sb .field { display: block; width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 15px; }
 .sb .night { background: var(--night); color: var(--night-ink); }
 .sb .night p { color: var(--night-sub); }
@@ -85,9 +114,10 @@ body { background: var(--bg); }
 .sb .pk .btn-g { color: var(--pk-white); border-color: rgba(255,255,255,.4); }
 .sb .pk .moon { position: absolute; z-index: 0; right: -60px; top: -30px; width: min(520px, 70vw); opacity: .13; animation: moon 14s ease-in-out infinite alternate; }
 @keyframes moon { from { transform: rotate(-6deg) translateY(0); } to { transform: rotate(4deg) translateY(16px); } }
-.sb .journey { position: relative; margin-top: 44px; padding-top: 30px; }
+.sb .journey { position: relative; margin-top: 44px; padding-top: 30px; perspective: 1200px; }
 .sb .journey .rail { position: absolute; left: 0; right: 0; top: 52px; height: 3px; background: repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 10px, transparent 10px 18px); }
-.sb .journey .fill { position: absolute; left: 0; top: 52px; height: 3px; background: var(--pk-white); width: 0; animation: fill 14s linear infinite; }
+.sb .journey .fill { position: absolute; left: 0; top: 52px; height: 3px; background: var(--pk-white); width: 0; animation: fill 14s linear infinite; box-shadow: 0 0 6px rgba(255,255,255,.7); }
+.sb .journey .parcel { position: absolute; top: 34px; left: 0; width: 38px; height: 38px; margin-left: -19px; animation: travel 14s linear infinite; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); transform: translateZ(18px); }
 @keyframes fill { 0% { width: 0; } 92% { width: 100%; } 100% { width: 100%; } }
 .sb .journey .parcel { position: absolute; top: 34px; left: 0; width: 38px; height: 38px; margin-left: -19px; animation: travel 14s linear infinite; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); }
 @keyframes travel { 0% { left: 0; } 92% { left: 100%; } 100% { left: 100%; } }
@@ -200,15 +230,25 @@ const LiveCapture = () => {
           {s === 1 ? <><span className="blink">●</span> REC 00:{String(sec).padStart(2, "0")}</> : steps[s]}
         </span>
       </div>
-      <div style={{ marginTop: 14, height: 210, borderRadius: 12, background: "linear-gradient(135deg,#25443a,#0d1f18)", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", left: "18%", right: "18%", top: "26%", bottom: "20%", borderRadius: 6, background: "#c9a978", boxShadow: "inset 0 0 0 2px rgba(0,0,0,.15)" }}>
-          <div style={{ position: "absolute", left: "12%", right: "12%", top: "16%", padding: 8, background: "#fbfaf6", borderRadius: 3 }}>
-            <div className="label-strip" style={{ "--ink": "#17201b" }} />
-            <div className="mono" style={{ fontSize: 10, color: "#17201b", marginTop: 4 }}>TCS 7781 2290 4410</div>
+      <div className={`capture-stage state-${s}`}>
+        <div className="capture-wall" />
+        <div className="capture-floor" />
+        <div className="capture-beam" />
+        <div className="capture-box">
+          <div className="box-front" />
+          <div className="box-side" />
+          <div className="box-top">
+            <div className="capture-label">
+              <div className="label-strip" style={{ "--ink": "#17201b" }} />
+              <div className="mono" style={{ fontSize: 9, color: "#17201b", marginTop: 3 }}>TCS 7781 2290 4410</div>
+            </div>
           </div>
         </div>
         {s === 0 && <div className="scanline" />}
-        <div className="mono" style={{ position: "absolute", left: 12, bottom: 10, color: "#cfe9dd", fontSize: 11 }}>24-10-2026 14:32:{String(sec + 10).padStart(2, "0")} PKT</div>
+        <span className="frame-corner fc-a" /><span className="frame-corner fc-b" /><span className="frame-corner fc-c" /><span className="frame-corner fc-d" />
+        <div className="mono" style={{ position: "absolute", left: 12, bottom: 10, color: "#cfe9dd", fontSize: 11, textShadow: "0 1px 3px rgba(0,0,0,.6)" }}>24-10-2026 14:32:{String(sec + 10).padStart(2, "0")} PKT</div>
+        {s === 1 && <span className="capture-rec"><span className="blink" />REC</span>}
+        {s === 2 && <span className="capture-saved">✓ Clip fingerprinted</span>}
       </div>
       <div style={{ marginTop: 14, display: "grid", gap: 8, fontSize: 14, fontFamily: "var(--body)" }}>
         <KV k="Order" v="DZ-4482190" />
@@ -335,7 +375,7 @@ const PakBanner = ({ t }) => {
     }).join("\n")}</style>
     <div className="inner">
       <span className="eyebrow">{t.eyebrow}</span>
-      <h1>{t.h1}</h1>
+      <h1 className="grad">{t.h1}</h1>
       <p style={{ fontSize: 19 }}>{t.lead}</p>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 26 }}>
         <a href="#start" className="btn btn-p">{t.cta1}</a>
@@ -477,11 +517,35 @@ export default function SabootLanding() {
   const t = T[lang];
   const rtl = lang === "ur";
 
+  /* Reveal sections as they scroll into view. Runs on mount and when the language flips,
+     because re-rendering replaces section nodes. Falls back to visible if unsupported. */
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll(".sb .reveal"));
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof IntersectionObserver === "undefined") {
+      els.forEach((el) => el.classList.add("in"));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -60px 0px" });
+    els.forEach((el) => {
+      /* Anything already on screen at mount shows immediately; the rest wait for scroll. */
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) el.classList.add("in");
+      else io.observe(el);
+    });
+    return () => io.disconnect();
+  }, [lang]);
+
   const badReturns = (calc.orders * calc.ret * calc.bad) / 10000;
   const monthlyLoss = badReturns * calc.value;
   const recoverable = monthlyLoss * 0.6;
   const setC = (k) => (e) => setCalc({ ...calc, [k]: Number(e.target.value) });
-
+  const fillFor = (v, min, max) => `${((v - min) / (max - min)) * 100}%`;
+  const rangeStyle = (v, min, max) => ({ "--fill": fillFor(v, min, max) });
   const price = (m) => (m === 0 ? "Rs 0" : rs(yearly ? m * 10 / 12 : m));
 
   return (
@@ -516,7 +580,7 @@ export default function SabootLanding() {
       </div>
 
       {/* LOCAL RETAILER PROBLEMS */}
-      <section id="problems">
+      <section id="problems" className="reveal">
         <div className="wrap">
           <span className="eyebrow">{t.probEyebrow}</span>
           <h2>{t.probH}</h2>
@@ -541,7 +605,7 @@ export default function SabootLanding() {
       </section>
 
       {/* WHO IT'S FOR */}
-      <section className="band">
+      <section className="band reveal">
         <div className="wrap">
           <span className="eyebrow">Who it's for</span>
           <div className="tabs" role="tablist" style={{ margin: "14px 0 32px" }}>
@@ -560,15 +624,17 @@ export default function SabootLanding() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="band">
+      <section id="how" className="band reveal">
         <div className="wrap">
           <span className="eyebrow">How it works</span>
           <h2>{t.howH}</h2>
           <div className="grid4" style={{ marginTop: 36 }}>
             {[["Pack", "Scan the label. The packing is recorded."], ["Return", "Scan the return. The opening is recorded."], ["Claim", "Saboot opens the claim and starts the clock."], ["Recover", "Send the bundle and track it to a decision."]].map(([h, d], i) => (
-              <div key={h} className="tile">
-                <div className="mono" style={{ fontSize: 13, color: "var(--brand)", fontWeight: 700, marginBottom: 10 }}>Step {i + 1}</div>
-                <h3>{h}</h3><p style={{ margin: 0 }}>{d}</p>
+              <div key={h} className="tile card3d">
+                <div className="card3d-inner">
+                  <div className="mono" style={{ fontSize: 13, color: "var(--brand)", fontWeight: 700, marginBottom: 10 }}>Step {i + 1}</div>
+                  <h3>{h}</h3><p style={{ margin: 0 }}>{d}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -576,24 +642,27 @@ export default function SabootLanding() {
       </section>
 
       {/* ALTERNATING FEATURES */}
-      <section id="features">
+      <section id="features" className="reveal">
         <div className="wrap">
           {features.map((f, i) => (
             <div key={f.title} className={`row grid2 ${i % 2 ? "flip" : ""}`}>
               <div className="text">
                 <span className="eyebrow">{f.eyebrow}</span>
-                <h2>{f.title}</h2>
+                <h2 className="grad">{f.title}</h2>
                 <p style={{ fontSize: 17 }}>{f.body}</p>
                 <ul className="ticks">{f.ticks.map((x) => <li key={x}>{x}</li>)}</ul>
               </div>
-              <div className="visual">{f.visual}</div>
+            <div className="visual parallax">
+              {f.visual}
+              <div className="deep" style={{ position: "absolute", inset: 0, zIndex: -1, opacity: 0.4, filter: "blur(4px)" }}></div>
             </div>
-          ))}
+          </div>
+        ))}
         </div>
       </section>
 
       {/* DARAZ CHECKLIST — alternating, kraft band */}
-      <section style={{ background: "var(--kraft)" }}>
+      <section style={{ background: "var(--kraft)" }} className="reveal">
         <div className="wrap grid2">
           <div className="tile" style={{ order: 0 }}>
             <div style={{ fontSize: 13, color: "var(--sub)", marginBottom: 12 }}>What Daraz checks on a return</div>
@@ -608,14 +677,14 @@ export default function SabootLanding() {
           </div>
           <div>
             <span className="eyebrow">Built around the rules</span>
-            <h2>Show every item Daraz will look for, before it ships.</h2>
+            <h2 className="grad">Show every item Daraz will look for, before it ships.</h2>
             <p style={{ fontSize: 17 }}>Save a checklist for each product. During packing, Saboot prompts the packer to hold each item to the camera: tags, manual, warranty card, free gift, invoice. If a return comes back without them, your clip shows they went out.</p>
           </div>
         </div>
       </section>
 
       {/* RULES TABLE */}
-      <section>
+      <section className="reveal">
         <div className="wrap">
           <span className="eyebrow">Claim windows we track</span>
           <h2>Deadlines are short, and every company sets its own.</h2>
@@ -632,17 +701,17 @@ export default function SabootLanding() {
       </section>
 
       {/* CALCULATOR */}
-      <section id="calculator" className="band">
+      <section id="calculator" className="band reveal">
         <div className="wrap grid2">
           <div>
             <span className="eyebrow">Loss calculator</span>
-            <h2>What bad returns cost you every month.</h2>
+            <h2 className="grad">What bad returns cost you every month.</h2>
             <p>Move the sliders to match your store. The estimate assumes you win 6 in 10 claims once you have proof.</p>
             <div style={{ display: "grid", gap: 18, marginTop: 20 }}>
-              <label className="f" htmlFor="c-orders">Orders a month: {calc.orders.toLocaleString("en-PK")}<input id="c-orders" type="range" min="50" max="3000" step="50" value={calc.orders} onChange={setC("orders")} /></label>
-              <label className="f" htmlFor="c-ret">Parcels returned: {calc.ret}%<input id="c-ret" type="range" min="2" max="40" value={calc.ret} onChange={setC("ret")} /></label>
-              <label className="f" htmlFor="c-bad">Returns that come back wrong, empty or missing parts: {calc.bad}%<input id="c-bad" type="range" min="2" max="50" value={calc.bad} onChange={setC("bad")} /></label>
-              <label className="f" htmlFor="c-value">Average order value: {rs(calc.value)}<input id="c-value" type="range" min="500" max="20000" step="100" value={calc.value} onChange={setC("value")} /></label>
+              <label className="f" htmlFor="c-orders">Orders a month: <b className="display-num">{calc.orders.toLocaleString("en-PK")}</b><input id="c-orders" type="range" style={rangeStyle(calc.orders, 50, 3000)} min="50" max="3000" step="50" value={calc.orders} onChange={setC("orders")} /></label>
+              <label className="f" htmlFor="c-ret">Parcels returned: <b className="display-num">{calc.ret}%</b><input id="c-ret" type="range" style={rangeStyle(calc.ret, 2, 40)} min="2" max="40" value={calc.ret} onChange={setC("ret")} /></label>
+              <label className="f" htmlFor="c-bad">Returns that come back wrong, empty or missing parts: <b className="display-num">{calc.bad}%</b><input id="c-bad" type="range" style={rangeStyle(calc.bad, 2, 50)} min="2" max="50" value={calc.bad} onChange={setC("bad")} /></label>
+              <label className="f" htmlFor="c-value">Average order value: <b className="display-num">{rs(calc.value)}</b><input id="c-value" type="range" style={rangeStyle(calc.value, 500, 20000)} min="500" max="20000" step="100" value={calc.value} onChange={setC("value")} /></label>
             </div>
           </div>
           <div className="panel" dir="ltr">
@@ -651,7 +720,7 @@ export default function SabootLanding() {
               <div><div style={{ color: "var(--sub)", fontSize: 14 }}>Money at risk a month</div><span className="big" style={{ color: "var(--warn)" }}>{rs(monthlyLoss)}</span></div>
               <div><div style={{ color: "var(--sub)", fontSize: 14 }}>Estimated recoverable with proof</div><span className="big" style={{ color: "var(--brand)" }}>{rs(recoverable)}</span></div>
               <div style={{ borderTop: "1px solid var(--line)", paddingTop: 14, fontSize: 15 }}>
-                Standard plan costs <b>Rs 1,999</b> a month. {recoverable > 1999 ? <>That is about <b>{Math.max(1, Math.round(recoverable / 1999))}×</b> back.</> : <>At your volume, the Free plan is the better fit.</>}
+                Standard plan costs <b>Rs 1,999</b> a month. {recoverable > 1999 ? <>That is about <b className="display-num">{Math.max(1, Math.round(recoverable / 1999))}×</b> back.</> : <>At your volume, the Free plan is the better fit.</>}
               </div>
             </div>
             <p style={{ fontSize: 12, marginTop: 14, marginBottom: 0 }}>An estimate, not a promise. The 6 in 10 win rate is an assumption until our pilot gives real numbers. Outcomes depend on Daraz and courier decisions.</p>
@@ -660,7 +729,7 @@ export default function SabootLanding() {
       </section>
 
       {/* EVIDENCE STANDARD + SETUP — alternating pair */}
-      <section>
+      <section className="reveal">
         <div className="wrap">
           <div className="row grid2">
             <div className="text">
@@ -708,10 +777,10 @@ export default function SabootLanding() {
       </section>
 
       {/* COMPARISON */}
-      <section className="band">
+      <section className="band reveal">
         <div className="wrap">
           <span className="eyebrow">Why not your phone gallery?</span>
-          <h2>A video only counts when it is tied to the order.</h2>
+          <h2 className="grad">A video only counts when it is tied to the order.</h2>
           <div className="tscroll" style={{ marginTop: 24 }} dir="ltr">
             <table>
               <thead><tr><th></th><th>Phone gallery</th><th>CCTV</th><th style={{ color: "var(--brand)" }}>Saboot</th></tr></thead>
@@ -726,12 +795,12 @@ export default function SabootLanding() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing">
+      <section id="pricing" className="reveal">
         <div className="wrap">
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "end", gap: 16 }}>
             <div>
               <span className="eyebrow">Pricing</span>
-              <h2>One saved return pays for the month.</h2>
+              <h2 className="grad">One saved return pays for the month.</h2>
               <p style={{ margin: 0 }}>Planned flat price. We will not take a share of what you recover.</p>
             </div>
             <div className="tabs" role="tablist" aria-label="Billing period">
@@ -758,7 +827,7 @@ export default function SabootLanding() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="band">
+      <section id="faq" className="band reveal">
         <div className="wrap" style={{ maxWidth: 820 }}>
           <span className="eyebrow">FAQ</span>
           <h2>Questions sellers ask.</h2>
@@ -774,7 +843,7 @@ export default function SabootLanding() {
       </section>
 
       {/* FINAL CTA */}
-      <section id="start" className="night">
+      <section id="start" className="night reveal">
         <div className="wrap grid2">
           <div>
             <h2>{t.finalH}</h2>

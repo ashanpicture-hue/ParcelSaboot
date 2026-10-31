@@ -1,0 +1,19 @@
+# Saboot
+> Saboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers.
+
+Saboot is a proof-collection tool for Pakistani e-commerce sellers. It records continuous, timestamped packing videos and return-opening clips that serve as evidence for return claims on marketplaces like Daraz and couriers like TCS, Leopards, and PostEx. The site is available in English, Roman Urdu, and Roman Arabic.
+
+## Primary pages
+- [Home](https://saboot-site.vercel.app/): Landing page explaining how Saboot helps Pakistani online sellers win return claims with video proof.
+- [How it works](https://saboot-site.vercel.app/): Four steps from packing table to payout — record packing, capture returns, file claims, get paid.
+- [Features](https://saboot-site.vercel.app/): Continuous timestamped video, item checklist, claim deadline tracking, WhatsApp alerts, private cloud storage.
+- [Calculator](https://saboot-site.vercel.app/): Estimate monthly losses from returns and recoverable amounts based on parcel volume.
+- [Pricing](https://saboot-site.vercel.app/): Free, Standard, and Growth plans with different video retention and parcel limits.
+- [FAQ](https://saboot-site.vercel.app/): Answers about Daraz claim acceptance, video evidence, camera requirements, storage, and parcel limits.
+
+## Optional reference
+- [Daraz return policy](https://www.daraz.pk/return-policy/): Official Daraz return policy reference.
+- [Priceoye return policy](https://priceoye.pk/return-policy): Priceoye return policy reference.
+- [Courier claim deadlines](https://pakera.pk/claim-lost-or-damaged-courier-parcel-pakistan/): Guide to courier claim deadlines in Pakistan.
+- [FBR registration for sellers](https://pakera.pk/ecommerce-tax-register-online-sellers-pakistan/): Tax registration guide for Pakistani online sellers.
+- [State of online shopping Pakistan 2026](https://www.ordernation.com/blogs/research/state-of-online-shopping-pakistan-2026): Research on Pakistani e-commerce and COD return rates.
