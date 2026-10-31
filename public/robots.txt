@@ -87,4 +87,4 @@ User-agent: YandexBot
 Allow: /
 
 # Sitemap
-Sitemap: https://saboot-site.vercel.app/sitemap.xml
+Sitemap: https://parcelsaboot.vercel.app/sitemap.xml
