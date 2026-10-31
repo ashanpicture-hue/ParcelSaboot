@@ -1207,9 +1207,12 @@ export default function SabootLanding() {
                 </div>
                 <div className="row">
                   <span>© 2026 Saboot · Made in Pakistan</span>
-                  <span style={{ display: "flex", gap: 16 }}>
+                  <span style={{ display: "flex", gap: 16, alignItems: "center" }}>
                     <a href="/privacy" className="lnk">Privacy</a>
                     <a href="/terms" className="lnk">Terms</a>
+                    <a href="https://www.directree.io" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block" }}>
+                      <img src="https://www.directree.io/badge/directree-badge-black.svg" alt="Verified on directree" width="200" height="37" style={{ display: "block" }} />
+                    </a>
                   </span>
                   <span style={{ flexBasis: "100%", maxWidth: "68ch" }}>Not affiliated with, endorsed by or integrated with Daraz, Priceoye, TCS, Leopards, PostEx or Trax.</span>
                 </div>
