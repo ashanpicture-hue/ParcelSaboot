@@ -2,10 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#01411C" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3f4ef" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b120e" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Nastaliq+Urdu:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" />
     <meta name="description" content="ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers. Proof for every parcel - return claim evidence for Pakistani e-commerce sellers." />
-    <meta name="keywords" content="ParcelSaboot, parcel proof, return claim, Pakistani online sellers, Daraz return claim, TCS courier claim, Leopards courier claim, PostEx claim, COD return, e-commerce Pakistan, packing video proof, parcel recording, return dispute, seller protection, online selling Pakistan, Daraz seller, courier dispute resolution, parcel evidence, return claim deadline, COD parcel return, e-commerce logistics Pakistan" />
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <meta name="bingbot" content="index, follow" />
@@ -13,16 +17,10 @@
     <meta name="revisit-after" content="7 days" />
     <meta name="author" content="ParcelSaboot" />
     <meta name="google-site-verification" content="_FsebNoR_bDLryc4UAME6y5Fgbez7WTEZEadcLs5Zvk" />
-    <!-- Google tag (gtag.js) — loads only after cookie consent, managed in SabootLanding.jsx -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLB08DLTKL"></script>
+    <!-- Google Analytics is loaded by SabootLanding.jsx only after the visitor accepts cookies. -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      // GA4 config is deferred until cookie consent is granted in the frontend component
-      if (window.cookieConsentGranted) {
-        gtag('config', 'G-DLB08DLTKL');
-      }
+      window.gtag = function () { dataLayer.push(arguments); };
     </script>
     <meta property="og:title" content="ParcelSaboot · Proof for every parcel" />
     <meta property="og:description" content="ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers." />
@@ -30,8 +28,6 @@
     <meta property="og:url" content="https://parcelsaboot.vercel.app/" />
     <meta property="og:site_name" content="ParcelSaboot" />
     <meta property="og:locale" content="en_PK" />
-    <meta property="og:locale:alternate" content="ur_PK" />
-    <meta property="og:locale:alternate" content="ar_SA" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ParcelSaboot · Proof for every parcel" />
     <meta name="twitter:description" content="ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers." />
@@ -44,43 +40,32 @@
     <title>ParcelSaboot · Proof for every parcel - Return Claim Evidence for Pakistani Sellers</title>
     <style>body{margin:0}</style>
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ParcelSaboot",
+  "url": "https://parcelsaboot.vercel.app/",
+  "logo": "https://parcelsaboot.vercel.app/favicon.svg",
+  "description": "ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers.",
+  "foundingDate": "2025",
+  "legalName": "ParcelSaboot",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "PK"
+  },
+  "contactPoint": [
     {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "ParcelSaboot",
-      "url": "https://parcelsaboot.vercel.app/",
-      "logo": "https://parcelsaboot.vercel.app/favicon.svg",
-      "sameAs": [],
-      "description": "ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers.",
-      "founder": [],
-      "foundingDate": "2025",
-      "legalName": "ParcelSaboot",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "PK"
-      },
-      "contactPoint": [{
-        "@type": "ContactPoint",
-        "contactType": "customer support",
-        "availableLanguage": ["en", "ur", "ar"],
-        "contactOption": []
-      }]
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "availableLanguage": [
+        "en",
+        "ur"
+      ]
     }
+  ]
+}
     </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://parcelsaboot.vercel.app/",
-      "name": "ParcelSaboot",
-      "description": "ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers.",
-      "potentialAction": [{
-        "@type": "SearchAction",
-        "target": "https://parcelsaboot.vercel.app/?q={search_term}",
-        "query-input": "required name=search_term"
-      }]
-    }
-    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -177,6 +162,37 @@
       ]
     }
     </script>
+    <!-- JSON-LD WebSite Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://parcelsaboot.vercel.app/",
+      "name": "ParcelSaboot",
+      "description": "ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers.",
+      "potentialAction": [{
+        "@type": "SearchAction",
+        "target": "https://parcelsaboot.vercel.app/?q={search_term}",
+        "query-input": "required name=search_term"
+      }]
+    }
+    </script>
+    <!-- JSON-LD BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://parcelsaboot.vercel.app/"
+        }
+      ]
+    }
+    </script>
+    <!-- JSON-LD Article Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -201,20 +217,6 @@
       "keywords": ["parcel proof", "return claim", "Pakistani online sellers", "Daraz return claim", "TCS courier claim", "Leopards courier claim", "PostEx claim", "COD return", "e-commerce Pakistan", "packing video proof", "parcel recording", "return dispute", "seller protection", "online selling Pakistan", "Daraz seller", "courier dispute resolution", "parcel evidence", "return claim deadline", "COD parcel return", "e-commerce logistics Pakistan"],
       "articleSection": "E-commerce",
       "inLanguage": ["en", "ur", "ar"]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://parcelsaboot.vercel.app/"
-        }
-      ]
     }
     </script>
   </head>
