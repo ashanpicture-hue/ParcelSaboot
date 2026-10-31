@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from './supabase';
+
 
 /*
   Saboot (ثبوت) — marketing landing page, v2
@@ -561,18 +561,24 @@ export default function SabootLanding() {
     const volume = document.getElementById('volume')?.value || '';
 
     try {
-      const { error } = await supabase
-        .from('early_access_signups')
-        .insert([{ store_name: store, whatsapp: phone, sells_on: volume, created_at: new Date().toISOString() }]);
+      const response = await fetch('/api/submit-signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ store_name: store, whatsapp: phone, sells_on: volume }),
+      });
 
-      if (error) throw error;
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Submission failed');
+      }
 
       // GA4 event tracking
       if (typeof window.gtag !== 'undefined') {
         window.gtag('event', 'early_access_signup', {
           method: 'form',
           sells_on: volume,
-          store_name: store
+          store_name: store,
         });
       }
 

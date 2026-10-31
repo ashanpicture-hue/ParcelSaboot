@@ -1,6 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
+// No Supabase client on the frontend.
+// All database writes go through our Vercel serverless function at /api/submit-signup
+// This keeps the Supabase service role key secret and prevents data theft.
 
-const supabaseUrl = 'https://qybzjhmrkwsoamesfuga.supabase.co';
-const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY'; // Replace with your actual Supabase anon key
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const API_BASE = '';
