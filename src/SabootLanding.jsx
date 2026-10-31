@@ -1,26 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 
 const css = `
 @import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap");
 :root {
-  --pk-green:#01411C;
-  --pk-green-2:#0a5a2c;
-  --pk-white:#ffffff;
-  --ink:#17201b;
-  --sub:#55625b;
-  --line:#e0e4dc;
-  --bg:#f6f5f0;
-  --card:#fffefb;
-  --kraft:#efe6d6;
-  --brand:#01411C;
-  --brand-soft:#e2eee5;
-  --warn:#c2410c;
-  --warn-soft:#fbeadf;
-  --amber:#a16207;
-  --amber-soft:#fbf1d6;
-  --night:#10201a;
-  --night-ink:#e8f0eb;
+  --bg:#f7f6f2;
+  --ink:#1a1a18;
+  --sub:#5c5c55;
+  --line:#d9d7cf;
+  --card:#ffffff;
+  --brand:#0b3d2e;
+  --brand-soft:#e8f0e8;
+  --warn:#a33a1e;
+  --warn-soft:#fbeae3;
+  --night:#0f1410;
+  --night-ink:#e8efe9;
   --night-sub:#a9bdb3;
   --on-brand:#ffffff;
   --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
@@ -30,15 +24,17 @@ const css = `
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ink:#e8eee9; --sub:#a3b2aa; --line:#2a3a33; --bg:#0f1714; --card:#15201c; --kraft:#2a2419;
-    --brand:#4cc38a; --brand-soft:#123a24; --warn:#f08a5d; --warn-soft:#3a2219; --amber:#e3b04b;
-    --amber-soft:#382c12; --night:#0a110e; --on-brand:#06140e; color-scheme: dark;
+    --bg:#0b110e; --ink:#e8efe9; --sub:#a9bdb3; --line:#2a332c; --card:#121915;
+    --brand:#4cc38a; --brand-soft:#123a24; --warn:#f08a5d; --warn-soft:#3a2219;
+    --night:#0a110e; --night-ink:#e8efe9; --night-sub:#a9bdb3; --on-brand:#06140e;
+    color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --ink:#e8eee9; --sub:#a3b2aa; --line:#2a3a33; --bg:#0f1714; --card:#15201c; --kraft:#2a2419;
-  --brand:#4cc38a; --brand-soft:#123a24; --warn:#f08a5d; --warn-soft:#3a2219; --amber:#e3b04b;
-  --amber-soft:#382c12; --night:#0a110e; --on-brand:#06140e; color-scheme: dark;
+  --bg:#0b110e; --ink:#e8efe9; --sub:#a9bdb3; --line:#2a332c; --card:#121915;
+  --brand:#4cc38a; --brand-soft:#123a24; --warn:#f08a5d; --warn-soft:#3a2219;
+  --night:#0a110e; --night-ink:#e8efe9; --night-sub:#a9bdb3; --on-brand:#06140e;
+  color-scheme: dark;
 }
 body { background: var(--bg); margin: 0; }
 .sb, .sb * { box-sizing: border-box; }
@@ -49,9 +45,9 @@ body { background: var(--bg); margin: 0; }
 .sb a { color: inherit; text-decoration: none; }
 .sb :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
 .sb .wrap { max-width: 1140px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
-.sb .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; font-size: 15px; border: 0; cursor: pointer; font-family: inherit; transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease; }
-.sb .btn-p { background: var(--brand); color: var(--on-brand); box-shadow: 0 1px 2px rgba(10,40,25,.18); }
-.sb .btn-p:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--brand) 55%, transparent); }
+.sb .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 8px; font-weight: 600; font-size: 15px; border: 0; cursor: pointer; font-family: inherit; transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease, border-color .12s ease; }
+.sb .btn-p { background: var(--brand); color: var(--on-brand); box-shadow: 0 1px 2px rgba(11,61,46,.18); }
+.sb .btn-p:hover { filter: brightness(1.05); transform: translateY(-1px); box-shadow: 0 8px 20px -8px rgba(11,61,46,.45); }
 .sb .btn-p:active { transform: translateY(0) scale(.98); box-shadow: none; }
 .sb .btn-g { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 .sb .btn-g:hover { border-color: var(--brand); color: var(--brand); background: color-mix(in srgb, var(--brand) 6%, transparent); }
@@ -60,87 +56,83 @@ body { background: var(--bg); margin: 0; }
 .sb h2 { font-size: clamp(26px, 3.4vw, 40px); line-height: 1.12; margin: 10px 0 14px; letter-spacing: -.015em; text-wrap: balance; }
 .sb h3 { font-size: 20px; margin: 0 0 8px; text-wrap: balance; }
 .sb p { margin: 0 0 14px; color: var(--sub); max-width: 62ch; }
-.sb .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); display: inline-flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.sb .eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--brand); }
-.sb .grad { background: linear-gradient(100deg, var(--brand) 10%, var(--pk-green-2) 55%, var(--brand) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sb .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.sb .eyebrow::before { content: ""; width: 16px; height: 1px; background: var(--brand); }
+.sb .grad { color: var(--brand); }
 .sb .display-num { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.sb section { padding-block: 88px; scroll-margin-top: 78px; }
+.sb section { padding-block: 96px; scroll-margin-top: 78px; }
 .sb html { scroll-behavior: smooth; }
 .sb .band { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.sb .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-.sb .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.sb .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.sb .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.sb .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.sb .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .sb .grid2 > *, .sb .grid3 > *, .sb .grid4 > * { min-width: 0; }
 .sb .row.flip .text { order: 2; } .sb .row.flip .visual { order: 1; }
-.sb .row + .row { margin-top: 96px; }
+.sb .row + .row { margin-top: 104px; }
 .sb .ticks { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
-.sb .ticks li { padding-inline-start: 28px; position: relative; color: var(--ink); }
-.sb .ticks li::before { content: ""; position: absolute; inset-inline-start: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--brand-soft); box-shadow: inset 0 0 0 5px var(--brand); }
-.sb[dir="rtl"] .ticks li::before { top: 13px; }
-.sb .panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; box-shadow: 0 1px 2px rgba(15,60,40,.06); }
-.sb .tile { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; transition: border-color .15s ease, box-shadow .15s ease; }
-.sb .tile:hover { border-color: color-mix(in srgb, var(--brand) 35%, var(--line)); box-shadow: 0 12px 30px -14px rgba(15,60,40,.25); }
-.sb .big { display: block; font-family: var(--display); font-size: 32px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.sb .pill { display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
+.sb .ticks li { padding-inline-start: 26px; position: relative; color: var(--ink); }
+.sb .ticks li::before { content: ""; position: absolute; inset-inline-start: 0; top: 7px; width: 14px; height: 14px; border-radius: 50%; background: var(--brand-soft); box-shadow: inset 0 0 0 4px var(--brand); }
+.sb[dir="rtl"] .ticks li::before { top: 14px; }
+.sb .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; box-shadow: 0 1px 2px rgba(15,60,40,.04); }
+.sb .tile { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 24px; transition: border-color .12s ease, box-shadow .12s ease; }
+.sb .tile:hover { border-color: color-mix(in srgb, var(--brand) 30%, var(--line)); box-shadow: 0 8px 24px -10px rgba(15,60,40,.12); }
+.sb .big { display: block; font-family: var(--display); font-size: 30px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.sb .pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
 .sb .mono { font-family: var(--mono); }
 .sb .tscroll { overflow-x: auto; }
-.sb table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 600px; }
+.sb table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 620px; }
 .sb th, .sb td { padding: 14px 12px; border-bottom: 1px solid var(--line); text-align: start; vertical-align: top; }
 .sb th { font-size: 13px; color: var(--sub); font-weight: 600; }
 .sb .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-.sb .tab { padding: 10px 16px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
-.sb .tab:hover:not([aria-selected="true"]) { border-color: color-mix(in srgb, var(--brand) 45%, var(--line)); background: color-mix(in srgb, var(--brand) 6%, var(--card)); color: var(--brand); }
+.sb .tab { padding: 10px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; transition: background-color .12s ease, color .12s ease, border-color .12s ease; }
+.sb .tab:hover:not([aria-selected="true"]) { border-color: color-mix(in srgb, var(--brand) 40%, var(--line)); background: color-mix(in srgb, var(--brand) 5%, var(--card)); color: var(--brand); }
 .sb .tab:active { transform: scale(.96); }
-.sb .tab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.sb .faq button { width: 100%; text-align: start; background: none; border: 0; padding: 18px 0; font: inherit; font-size: 17px; font-weight: 600; color: var(--ink); cursor: pointer; display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); }
+.sb .tab[aria-selected="true"] { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+.sb .faq button { width: 100%; text-align: start; background: none; border: 0; padding: 16px 0; font: inherit; font-size: 16px; font-weight: 600; color: var(--ink); cursor: pointer; display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px solid var(--line); }
 .sb .faq button:active { color: var(--brand); }
 .sb .faq > div:last-child button { border-bottom: none; }
 .sb label.f { display: grid; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
 .sb input[type=range] { width: 100%; -webkit-appearance: none; appearance: none; height: 26px; background: transparent; cursor: pointer; }
-.sb input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 99px; background: linear-gradient(90deg, var(--brand) 0 var(--fill, 50%), var(--line) var(--fill, 50%)); }
-.sb input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; margin-top: -7px; border-radius: 50%; background: var(--brand); border: 3px solid var(--card); box-shadow: 0 1px 4px rgba(15,60,40,.4), 0 0 0 1px var(--line); transition: transform .15s ease, box-shadow .15s ease; }
-.sb input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); box-shadow: 0 2px 8px rgba(15,60,40,.45), 0 0 0 6px color-mix(in srgb, var(--brand) 18%, transparent); }
-.sb .field { display: block; width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 15px; }
+.sb input[type=range]::-webkit-slider-runnable-track { height: 5px; border-radius: 99px; background: linear-gradient(90deg, var(--brand) 0 var(--fill, 50%), var(--line) var(--fill, 50%)); }
+.sb input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; margin-top: -7px; border-radius: 50%; background: var(--brand); border: 2px solid var(--card); box-shadow: 0 1px 3px rgba(15,60,40,.35), 0 0 0 1px var(--line); transition: transform .12s ease, box-shadow .12s ease; }
+.sb input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.1); box-shadow: 0 2px 6px rgba(15,60,40,.4), 0 0 0 5px color-mix(in srgb, var(--brand) 15%, transparent); }
+.sb .field { display: block; width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 15px; }
 .sb .field:focus { border-color: var(--brand); outline: none; }
 .sb .night { background: var(--night); color: var(--night-ink); }
 .sb .night p { color: var(--night-sub); }
 .sb .night h2 { color: var(--night-ink); }
-.sb .night .field { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.16); color: var(--night-ink); }
-.sb .label-strip { background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px); height: 34px; border-radius: 2px; opacity: .85; }
-/* Pakistan banner: white hoist stripe + green field */
-.sb .pk { position: relative; overflow: hidden; color: var(--pk-white); background: linear-gradient(90deg, var(--pk-white) 0 clamp(18px, 6vw, 72px), var(--pk-green) clamp(18px, 6vw, 72px)); }
-.sb .pk::after { content: ""; position: absolute; inset: 0; background: radial-gradient(1200px 400px at 80% -10%, rgba(255,255,255,.08), transparent 60%); pointer-events: none; }
-.sb .pk .inner { position: relative; z-index: 1; padding-block: 72px 48px; padding-left: max(calc(clamp(18px, 6vw, 72px) + 24px), env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); max-width: 1240px; margin: 0 auto; }
-.sb .pk h1 { color: var(--pk-white); max-width: 17ch; }
-.sb .pk p { color: rgba(255,255,255,.85); }
-.sb .pk .eyebrow { color: #bfe3cb; }
-.sb .pk .btn-p { background: var(--pk-white); color: var(--pk-green); }
-.sb .pk .btn-g { color: var(--pk-white); border-color: rgba(255,255,255,.45); }
-.sb .journey { position: relative; margin-top: 40px; padding-top: 28px; }
-.sb .journey .rail { position: absolute; left: 0; right: 0; top: 52px; height: 3px; background: repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 10px, transparent 10px 18px); }
-.sb .journey ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); position: relative; }
+.sb .night .field { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: var(--night-ink); }
+/* Professional hero: deep charcoal + parcel green */
+.sb .pk { position: relative; overflow: hidden; color: var(--pk-white); background: var(--night); }
+.sb .pk .inner { position: relative; z-index: 1; padding-block: 80px 56px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); max-width: 1240px; margin: 0 auto; }
+.sb .pk h1 { color: var(--pk-white); max-width: 16ch; }
+.sb .pk p { color: rgba(255,255,255,.82); }
+.sb .pk .eyebrow { color: #8fc9a8; }
+.sb .pk .eyebrow::before { background: #8fc9a8; }
+.sb .pk .btn-p { background: var(--pk-white); color: var(--night); }
+.sb .pk .btn-g { color: var(--pk-white); border-color: rgba(255,255,255,.35); }
+.sb .pk .btn-g:hover { border-color: var(--pk-white); color: var(--pk-white); background: rgba(255,255,255,.08); }
+/* Journey: clean step markers, no infinite animation */
+.sb .journey { position: relative; margin-top: 48px; padding-top: 32px; }
+.sb .journey .rail { position: absolute; left: 0; right: 0; top: 52px; height: 2px; background: rgba(255,255,255,.12); }
+.sb .journey ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
 .sb .journey li { display: grid; justify-items: center; text-align: center; gap: 6px; padding-top: 4px; font-family: var(--body); }
 .sb .journey li:first-child { justify-items: start; text-align: start; } .sb .journey li:last-child { justify-items: end; text-align: end; }
-.sb .journey .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--pk-green); border: 3px solid rgba(255,255,255,.6); margin-top: 10px; }
-.sb .journey b { font-size: 15px; } .sb .journey small { font-size: 12.5px; color: rgba(255,255,255,.7); max-width: 16ch; }
-.sb .ticker { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,.18); overflow: hidden; white-space: nowrap; font-family: var(--body); font-size: 14px; color: rgba(255,255,255,.85); }
-.sb .ticker div { display: inline-block; padding-block: 12px; animation: tick 40s linear infinite; }
-.sb .ticker span { margin-inline: 22px; }
-@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.sb .issue { display: grid; gap: 10px; align-content: start; }
-.sb .issue .big { font-size: 30px; }
-.sb .tag { justify-self: start; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 99px; }
+.sb .journey .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.35); border: 2px solid rgba(255,255,255,.5); margin-top: 10px; }
+.sb .journey b { font-size: 14px; } .sb .journey small { font-size: 12px; color: rgba(255,255,255,.6); max-width: 16ch; }
+/* Remove ticker entirely - vibecoded element */
 .sb .sticky-cta { display: none; }
+.sb .preview-box { height: 200px; background: var(--kraft); border-radius: 10px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--sub); font-size: 14px; font-weight: 500; }
 @media (max-width: 720px) {
-  .sb .journey ol { grid-template-columns: repeat(3, 1fr); row-gap: 18px; }
+  .sb .journey ol { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
   .sb .journey .rail { display: none; }
   .sb .journey li, .sb .journey li:first-child, .sb .journey li:last-child { justify-items: center; text-align: center; }
 }
 @media (max-width: 880px) {
-  .sb section { padding-block: 60px; }
-  .sb .grid2 { grid-template-columns: 1fr; gap: 32px; }
+  .sb section { padding-block: 64px; }
+  .sb .grid2 { grid-template-columns: 1fr; gap: 36px; }
   .sb .row.flip .text, .sb .row.flip .visual { order: initial; }
-  .sb .row + .row { margin-top: 64px; }
+  .sb .row + .row { margin-top: 72px; }
   .sb .grid3, .sb .grid4 { grid-template-columns: 1fr 1fr; }
   .sb .hide-m { display: none !important; }
   .sb .sticky-cta { display: flex; position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; gap: 10px; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--card); border-top: 1px solid var(--line); }
@@ -149,7 +141,6 @@ body { background: var(--bg); margin: 0; }
 }
 @media (max-width: 520px) { .sb .grid3, .sb .grid4 { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) {
-  .sb .ticker div { animation: none; }
   html { scroll-behavior: auto; }
 }
 `;
@@ -211,10 +202,10 @@ const issues = [
 ];
 
 const helpTag = {
-  daraz: ["Daraz", "#efe6d6", "#7a5a00"],
-  tcs: ["TCS", "#e2eee5", "#0a5a2c"],
-  leopards: ["Leopards", "#fbf1d6", "#a16207"],
-  postex: ["PostEx", "#e2eee5", "#0a5a2c"],
+  daraz: ["Daraz", "#e8f0e8", "#0b3d2e"],
+  tcs: ["TCS", "#e8f0e8", "#0b3d2e"],
+  leopards: ["Leopards", "#fbeae3", "#a33a1e"],
+  postex: ["PostEx", "#e8f0e8", "#0b3d2e"],
 };
 
 const audiences = {
@@ -239,9 +230,9 @@ const rules = [
 ];
 
 const features = [
-  { eyebrow: "Continuous recording", title: "One take, no cuts", body: "Saboot records from empty box to sealed parcel in a single continuous clip. No editing means no one can claim the video was staged.", ticks: ["Continuous from start to finish", "Order number burned into frame", "Tamper-evident fingerprint"], visual: <div style={{ height: 220, background: "var(--kraft)", borderRadius: 16, border: "1px solid var(--line)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--sub)" }}>Packing station preview</div> },
-  { eyebrow: "Claim deadlines", title: "Never miss a window", body: "Every marketplace and courier sets its own claim window. Saboot tracks them and alerts you on WhatsApp before the deadline passes.", ticks: ["48-hour Daraz window", "7-day TCS window", "WhatsApp deadline alerts"], visual: <div style={{ height: 220, background: "var(--kraft)", borderRadius: 16, border: "1px solid var(--line)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--sub)" }}>Deadline tracker preview</div> },
-  { eyebrow: "Evidence bundle", title: "One-click claim file", body: "Export a ready-to-send evidence file with the packing clip, return clip, and a written statement. Attach it to your Daraz or courier claim.", ticks: ["Evidence PDF per order", "Clip fingerprint included", "Ready for Daraz / TCS"], visual: <div style={{ height: 220, background: "var(--kraft)", borderRadius: 16, border: "1px solid var(--line)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--sub)" }}>Evidence bundle preview</div> },
+  { eyebrow: "Continuous recording", title: "One take, no cuts", body: "Saboot records from empty box to sealed parcel in a single continuous clip. No editing means no one can claim the video was staged.", ticks: ["Continuous from start to finish", "Order number burned into frame", "Tamper-evident fingerprint"], visual: <div className="preview-box">Packing station preview</div> },
+  { eyebrow: "Claim deadlines", title: "Never miss a window", body: "Every marketplace and courier sets its own claim window. Saboot tracks them and alerts you on WhatsApp before the deadline passes.", ticks: ["48-hour Daraz window", "7-day TCS window", "WhatsApp deadline alerts"], visual: <div className="preview-box">Deadline tracker preview</div> },
+  { eyebrow: "Evidence bundle", title: "One-click claim file", body: "Export a ready-to-send evidence file with the packing clip, return clip, and a written statement. Attach it to your Daraz or courier claim.", ticks: ["Evidence PDF per order", "Clip fingerprint included", "Ready for Daraz / TCS"], visual: <div className="preview-box">Evidence bundle preview</div> },
 ];
 
 const faqs = [
@@ -399,7 +390,7 @@ export default function SabootLanding() {
           <header style={{ position: "sticky", top: "env(safe-area-inset-top, 0px)", zIndex: 15, background: "var(--bg)", borderBottom: "1px solid var(--line)" }}>
             <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, height: 66 }}>
               <a href="#top" style={{ display: "flex", alignItems: "center", gap: 10, fontWeight: 800, fontSize: 20, textDecoration: "none", fontFamily: "var(--display)" }}>
-                <span style={{ width: 32, height: 32, borderRadius: 8, background: "var(--brand)", color: "var(--on-brand)", display: "grid", placeItems: "center", fontSize: 16 }}>S</span>
+                <span style={{ width: 32, height: 32, borderRadius: 6, background: "var(--brand)", color: "var(--on-brand)", display: "grid", placeItems: "center", fontSize: 16 }}>S</span>
                 Saboot <span style={{ fontFamily: "var(--urdu)", fontWeight: 400, color: "var(--sub)", fontSize: 15 }}>ثبوت</span>
               </a>
               <nav className="hide-m" style={{ display: "flex", gap: 24, fontSize: 15 }}>
@@ -413,33 +404,55 @@ export default function SabootLanding() {
           </header>
 
           <section className="pk reveal">
-            <div className="inner">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="inner"
+            >
               <span className="eyebrow">{t.eyebrow}</span>
-              <h1>{t.h1}</h1>
-              <p style={{ fontSize: 18, maxWidth: "42ch" }}>{t.lead}</p>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 26 }}>
+              <motion.h1
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {t.h1}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                style={{ fontSize: 18, maxWidth: "42ch" }}
+              >
+                {t.lead}
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 26 }}
+              >
                 <a href="#start" className="btn btn-p" style={{ padding: "14px 24px", fontSize: 16 }}>{t.cta1}</a>
                 <a href="#calculator" className="btn btn-g" style={{ padding: "14px 24px", fontSize: 16 }}>{t.cta2}</a>
-              </div>
+              </motion.div>
               <div className="journey">
                 <div className="rail"></div>
                 <ol>
                   {["Pack", "Return", "Claim", "Recover"].map((step, i) => (
-                    <li key={step}>
+                    <motion.li
+                      key={step}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    >
                       <div className="dot"></div>
                       <b>{step}</b>
                       <small>{i === 0 ? "Scan label" : i === 1 ? "Scan return" : i === 2 ? "Open claim" : "Track to decision"}</small>
-                    </li>
+                    </motion.li>
                   ))}
                 </ol>
               </div>
-              <div className="ticker">
-                <div>
-                  <span>Daraz · TCS · Leopards · PostEx</span>
-                  <span>Daraz · TCS · Leopards · PostEx</span>
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </section>
 
           <div className="band" style={{ borderTop: 0 }}>
@@ -455,14 +468,20 @@ export default function SabootLanding() {
                 {issues.map((x) => {
                   const [label, bg, fg] = helpTag[x.help];
                   return (
-                    <article key={x.what} className="tile issue">
+                    <motion.article
+                      key={x.what}
+                      className="tile issue"
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.1 + issues.indexOf(x) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    >
                       <span className="big">{x.fig}</span>
                       <b style={{ fontSize: 16 }}>{x.what}</b>
                       <span style={{ color: "var(--sub)", fontSize: 15 }}>{x.why}</span>
                       <span className="tag" style={{ background: bg, color: fg }}>{label}</span>
                       <span style={{ fontSize: 15 }}>{x.how}</span>
                       <a href={x.src[1]} style={{ fontSize: 12.5, color: "var(--sub)" }}>{x.src[0]}</a>
-                    </article>
+                    </motion.article>
                   );
                 })}
               </div>
@@ -494,10 +513,16 @@ export default function SabootLanding() {
               <h2>{t.howH}</h2>
               <div className="grid4" style={{ marginTop: 36 }}>
                 {[["Pack", "Scan the label. The packing is recorded."], ["Return", "Scan the return. The opening is recorded."], ["Claim", "Saboot opens the claim and starts the clock."], ["Recover", "Send the bundle and track it to a decision."]].map(([h, d], i) => (
-                  <div key={h} className="tile">
+                  <motion.div
+                    key={h}
+                    className="tile"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  >
                     <div className="mono" style={{ fontSize: 13, color: "var(--brand)", fontWeight: 700, marginBottom: 10 }}>Step {i + 1}</div>
                     <h3>{h}</h3><p style={{ margin: 0 }}>{d}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -506,20 +531,26 @@ export default function SabootLanding() {
           <section id="features" className="reveal">
             <div className="wrap">
               {features.map((f, i) => (
-                <div key={f.title} className={`row grid2 ${i % 2 ? "flip" : ""}`}>
+                <motion.div
+                  key={f.title}
+                  className={`row grid2 ${i % 2 ? "flip" : ""}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                >
                   <div className="text">
                     <span className="eyebrow">{f.eyebrow}</span>
                     <h2 className="grad">{f.title}</h2>
                     <p style={{ fontSize: 17 }}>{f.body}</p>
                     <ul className="ticks">{f.ticks.map((x) => <li key={x}>{x}</li>)}</ul>
                   </div>
-                  <div className="visual" style={{ height: 220, background: "var(--kraft)", borderRadius: 16, border: "1px solid var(--line)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--sub)" }}>{f.visual}</div>
-                </div>
+                  <div className="visual preview-box">{f.visual}</div>
+                </motion.div>
               ))}
             </div>
           </section>
 
-          <section style={{ background: "var(--kraft)" }} className="reveal">
+          <section style={{ background: "var(--card)" }} className="reveal">
             <div className="wrap grid2">
               <div className="tile" style={{ order: 0 }}>
                 <div style={{ fontSize: 13, color: "var(--sub)", marginBottom: 12 }}>What Daraz checks on a return</div>
@@ -663,14 +694,21 @@ export default function SabootLanding() {
                 {[["Free", 0, "10 parcels a month", ["Packing and return videos", "Claim tracker", "Evidence PDF", "30-day storage"], false],
                   ["Standard", 1999, "300 parcels a month", ["Everything in Free", "WhatsApp deadline alerts", "Item checklists per product", "Dashboard", "3 packer logins", "180-day storage"], true],
                   ["Growth", 4999, "800 parcels a month", ["Everything in Standard", "10 packer logins and stations", "Order import by CSV", "1-year storage", "Priority WhatsApp support"], false]].map(([n, m, q, items, hot]) => (
-                  <div key={n} className="tile" style={hot ? { border: "2px solid var(--brand)", position: "relative" } : { position: "relative" }}>
+                  <motion.div
+                    key={n}
+                    className="tile"
+                    style={hot ? { border: "2px solid var(--brand)", position: "relative" } : { position: "relative" }}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 + (["Free","Standard","Growth"].indexOf(n) * 0.08), ease: [0.22, 1, 0.36, 1] }}
+                  >
                     {hot && <span className="pill" style={{ position: "absolute", top: -12, insetInlineStart: 22, background: "var(--brand)", color: "var(--on-brand)" }}>Most popular</span>}
                     <h3>{n}</h3>
                     <span className="big">{price(m)}<span style={{ fontSize: 15, color: "var(--sub)", fontWeight: 500, fontFamily: "var(--body)" }}> / month</span></span>
                     <div style={{ color: "var(--sub)", minHeight: 24 }}>{yearly && m ? `Billed ${rs(m * 10)} a year · ` : ""}{q}</div>
                     <ul className="ticks">{items.map((x) => <li key={x}>{x}</li>)}</ul>
                     <a href="#start" className={`btn ${hot ? "btn-p" : "btn-g"}`} style={{ width: "100%", marginTop: 18 }}>Choose {n}</a>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
               <p style={{ fontSize: 13, marginTop: 16 }}>Planned prices for launch. Each parcel covers one packing clip of up to 60 seconds and, if it comes back, one return clip. Clips are kept for the storage period of your plan, and longer while a claim is open. Payment methods will be confirmed before billing starts. Prices exclude tax.</p>
@@ -698,7 +736,7 @@ export default function SabootLanding() {
                 <h2>{t.finalH}</h2>
                 <p style={{ fontSize: 18 }}>{t.finalP}</p>
               </div>
-              <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 16, padding: 22, display: "grid", gap: 14 }} dir="ltr">
+              <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 12, padding: 24, display: "grid", gap: 14 }} dir="ltr">
                 {sent ? (
                   <div style={{ padding: "24px 4px" }}>
                     <h3 style={{ color: "var(--night-ink)" }}>You're on the list.</h3>
@@ -738,7 +776,7 @@ export default function SabootLanding() {
                 margin: "0 auto",
                 background: "var(--bg)",
                 border: "1px solid var(--line)",
-                borderRadius: 14,
+                borderRadius: 12,
                 padding: 18,
                 zIndex: 50,
                 fontSize: 13,
