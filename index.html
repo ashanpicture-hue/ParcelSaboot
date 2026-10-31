@@ -13,13 +13,16 @@
     <meta name="revisit-after" content="7 days" />
     <meta name="author" content="ParcelSaboot" />
     <meta name="google-site-verification" content="_FsebNoR_bDLryc4UAME6y5Fgbez7WTEZEadcLs5Zvk" />
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) — loads only after cookie consent, managed in SabootLanding.jsx -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLB08DLTKL"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-DLB08DLTKL');
+      // GA4 config is deferred until cookie consent is granted in the frontend component
+      if (window.cookieConsentGranted) {
+        gtag('config', 'G-DLB08DLTKL');
+      }
     </script>
     <meta property="og:title" content="ParcelSaboot · Proof for every parcel" />
     <meta property="og:description" content="ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers." />

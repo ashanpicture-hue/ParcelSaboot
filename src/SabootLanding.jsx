@@ -178,6 +178,13 @@ const T = {
     howH: "Four steps from packing table to payout.",
     finalH: "Your next bad return is already on its way.",
     finalP: "ParcelSaboot is in development. Join early access and we will set up your first packing station with you when the pilot opens.",
+    cookie: {
+      title: "Cookies & Analytics",
+      desc: "We use Google Analytics to improve our site. Accept or decline below:",
+      accept: "Accept",
+      decline: "Decline",
+      privacy: "Privacy Policy",
+    },
   },
   ur: {
     nav: ["طریقہ کار", "خصوصیات", "حساب", "قیمت", "سوالات"],
@@ -194,6 +201,13 @@ const T = {
     howH: "پیکنگ ٹیبل سے رقم کی واپسی تک چار قدم۔",
     finalH: "آپ کا اگلا خراب ریٹرن راستے میں ہے۔",
     finalP: "پرسل سبوت ابھی تیاری میں ہے۔ ابتدائی رسائی کے لیے شامل ہوں، پائلٹ شروع ہونے پر ہم آپ کے ساتھ پہلا پیکنگ اسٹیشن لگائیں گے۔",
+    cookie: {
+      title: "کوکيز اور تجزیات",
+      desc: "ہم سائٹ کو بہتر بنانے کے لیے گوگل اینالیٹکس استعمال کرتے ہیں۔ قبول یا مسترد کریں:",
+      accept: "قبول کریں",
+      decline: "مسترد کریں",
+      privacy: "پرائیویسی پالیسی",
+    },
   },
 };
 
@@ -508,15 +522,60 @@ const rs = (n) => "Rs " + Math.round(n).toLocaleString("en-PK");
 
 /* ---------- page ---------- */
 
+function PrivacyPolicyPage({ lang }) {
+  const isUr = lang === "ur";
+  return (
+    <div style={{ padding: 32, maxWidth: 640, margin: "0 auto", lineHeight: 1.7, color: "var(--ink)" }} dir={isUr ? "rtl" : "ltr"}>
+      <a href="/" style={{ display: "inline-block", marginBottom: 20, color: "var(--brand)", textDecoration: "underline" }}>
+        ← {isUr ? "واپس گھر پر" : "Back to home"}
+      </a>
+      <h1 style={{ fontSize: 24, marginBottom: 16 }}>{isUr ? "پرائیویسی پالیسی" : "Privacy Policy"}</h1>
+      <p style={{ fontSize: 13, color: "var(--sub)" }}>{isUr ? "آخری تازہ ترین: 31 اکتوبر 2026" : "Last Updated: 2026-10-31"}</p>
+      <h2 style={{ fontSize: 16, marginTop: 20 }}>{isUr ? "ہم کون ہیں" : "Who we are"}</h2>
+      <p>{isUr ? "پرسل سبوت (ثبوت) پاکستانی آن لائن سیلرز کے لیے ثبوت اکٹھا کرنے والا ٹول ہے۔ ہم ہر پیکنگ اور ہر ریٹرن کی مسلسل، ٹائم سٹیمپڈ ویڈیوز ریکارڈ کرتے ہیں جو دراز، ٹی سی ایس، لیپرڈز اور پوسٹ ایکس جیسے مارکیٹ پلیسز اور کوریئرز کے ساتھ کلیم جیتنے کے لیے ثبوت کا کام آتی ہیں۔" : "ParcelSaboot (ثبوت) is a proof-collection tool for Pakistani e-commerce sellers. We record continuous, timestamped packing and return-opening videos that serve as evidence for return claims on marketplaces like Daraz and couriers like TCS, Leopards, and PostEx."}</p>
+      <p><strong>{isUr ? "رابطہ:" : "Contact:"}</strong> hello@parcelsaboot.com</p>
+      <p><strong>{isUr ? "مادی پتہ:" : "Physical address:"}</strong> {isUr ? "شائع نہیں کیا گیا — آزاد ڈویلپر" : "Not published — independent developer"}</p>
+      <p style={{ marginTop: 30, fontSize: 12, color: "var(--sub)" }}>{isUr ? "یہ ڈرافٹ ایک خودکار کوڈ آڈٹ سے تیار کیا گیا ہے۔ اس کی کسی لائسنس یافتہ وکیل سے جائزہ نہیں لیا گیا۔ producción پر انحصار کرنے سے پہلے پاکستان کے کسی ماہر وکیل سے جائزہ ضرور لیں۔" : "This draft was produced from an automated code audit. It has NOT been reviewed by a licensed attorney. Have a qualified lawyer in Pakistan review it before relying on it in production."}</p>
+    </div>
+  );
+}
+
+function TermsOfServicePage({ lang }) {
+  const isUr = lang === "ur";
+  return (
+    <div style={{ padding: 32, maxWidth: 640, margin: "0 auto", lineHeight: 1.7, color: "var(--ink)" }} dir={isUr ? "rtl" : "ltr"}>
+      <a href="/" style={{ display: "inline-block", marginBottom: 20, color: "var(--brand)", textDecoration: "underline" }}>
+        ← {isUr ? "واپس گھر پر" : "Back to home"}
+      </a>
+      <h1 style={{ fontSize: 24, marginBottom: 16 }}>{isUr ? "شرائطِ خدمت" : "Terms of Service"}</h1>
+      <p style={{ fontSize: 13, color: "var(--sub)" }}>{isUr ? "آخری تازہ ترین: 31 اکتوبر 2026" : "Last Updated: 2026-10-31"}</p>
+      <h2 style={{ fontSize: 16, marginTop: 20 }}>{isUr ? "ہم کون ہیں" : "Who we are"}</h2>
+      <p>{isUr ? "پرسل سبوت (ثبوت) پاکستانی آن لائن سیلرز کے لیے ثبوت اکٹھا کرنے والا ٹول ہے۔ ہم ہر پیکنگ اور ہر ریٹرن کی مسلسل، ٹائم سٹیمپڈ ویڈیوز ریکارڈ کرتے ہیں جو دراز، ٹی سی ایس، لیپرڈز اور پوسٹ ایکس جیسے مارکیٹ پلیسز اور کوریئرز کے ساتھ کلیم جیتنے کے لیے ثبوت کا کام آتی ہیں۔" : "ParcelSaboot (ثبوت) is a proof-collection tool for Pakistani e-commerce sellers. We record continuous, timestamped packing and return-opening videos that serve as evidence for return claims on marketplaces like Daraz and couriers like TCS, Leopards, and PostEx."}</p>
+      <p>{isUr ? "پرسل سبوت آپ کے لیے کلیم فائل نہیں کرتا۔ دراز اور کوریئرز باہر کے ٹولز کے ذریعے کلیم فائل کرنے کا कोई طریقہ فراہم نہیں کرتے، لہذا آپ کو ہر کلیم خود فائل کرنا پڑے گا۔ پرسل سبوت ثبوت تیار کرتا ہے اور آپ کو ڈڈ لائن بتاتا ہے۔ ہم یہ وعدہ نہیں کرتے کہ دراز، ٹی سی ایس، لیپرڈز، پوسٹ ایکس یا کوئی بھی دوسرا مارکیٹ پلیس یا کوریئر آپ کا کلیم قبول کرے گا۔ فیصلہ ان کا ہے۔" : "ParcelSaboot does not file claims for you. Daraz and couriers do not offer a way for outside tools to file claims, so you submit each claim yourself. ParcelSaboot prepares the evidence and tells you the deadline. We cannot promise that Daraz, TCS, Leopards, PostEx, or any other marketplace or courier will accept a claim. The decision is theirs."}</p>
+      <p><strong>{isUr ? "رابطہ:" : "Contact:"}</strong> hello@parcelsaboot.com</p>
+      <p style={{ marginTop: 30, fontSize: 12, color: "var(--sub)" }}>{isUr ? "یہ ڈرافٹ ایک خودکار کوڈ آڈٹ سے تیار کیا گیا ہے۔ اس کی کسی لائسنس یافتہ وکیل سے جائزہ نہیں لیا گیا۔ producción پر انحصار کرنے سے پہلے پاکستان کے کسی ماہر وکیل سے جائزہ ضرور لیں۔" : "This draft was produced from an automated code audit. It has NOT been reviewed by a licensed attorney. Have a qualified lawyer in Pakistan review it before relying on it in production."}</p>
+    </div>
+  );
+}
+
 export default function SabootLanding() {
   const [lang, setLang] = useState("en");
   const [aud, setAud] = useState("daraz");
   const [open, setOpen] = useState(0);
   const [yearly, setYearly] = useState(false);
   const [sent, setSent] = useState(false);
+  const [route, setRoute] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const onPopState = () => setRoute(window.location.pathname);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
     const [submitting, setSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState(null);
   const [calc, setCalc] = useState({ orders: 400, ret: 20, bad: 15, value: 3500 });
+  const [cookieConsent, setCookieConsent] = useState(null);
+  const [termsConsent, setTermsConsent] = useState(false);
   const t = T[lang];
   const rtl = lang === "ur";
 
@@ -542,6 +601,19 @@ export default function SabootLanding() {
     });
     return () => io.disconnect();
   }, [lang]);
+
+  /* GA4 only loads after cookie consent. Until the user accepts, no analytics script runs. */
+  useEffect(() => {
+    if (cookieConsent === true) {
+      window.cookieConsentGranted = true;
+      if (typeof window.gtag !== "undefined") {
+        window.gtag('config', 'G-DLB08DLTKL');
+      }
+    } else if (cookieConsent === false) {
+      window.cookieConsentGranted = false;
+      window.gtag = function() {};
+    }
+  }, [cookieConsent]);
 
   const badReturns = (calc.orders * calc.ret * calc.bad) / 10000;
   const monthlyLoss = badReturns * calc.value;
@@ -594,7 +666,12 @@ export default function SabootLanding() {
     <div className="sb" dir={rtl ? "rtl" : "ltr"} lang={rtl ? "ur" : "en"}>
       <style>{css}</style>
 
-      {/* NAV */}
+      {route === "/privacy" && <PrivacyPolicyPage lang={lang} />}
+      {route === "/terms" && <TermsOfServicePage lang={lang} />}
+
+      {route !== "/privacy" && route !== "/terms" && (
+        <>
+          {/* NAV */}
       <header style={{ position: "sticky", top: "env(safe-area-inset-top, 0px)", zIndex: 15, background: "var(--bg)", borderBottom: "1px solid var(--line)" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, height: 66 }}>
           <a href="#top" style={{ display: "flex", alignItems: "center", gap: 10, fontWeight: 800, fontSize: 20, textDecoration: "none", fontFamily: "var(--display)" }}>
@@ -909,22 +986,84 @@ export default function SabootLanding() {
               <label className="f" htmlFor="volume" style={{ color: "var(--night-ink)" }}>Where do you sell?
                 <select id="volume" className="field" defaultValue="daraz"><option value="daraz">Daraz</option><option value="social">Instagram / WhatsApp</option><option value="site">My own website</option><option value="all">More than one</option></select>
               </label>
-              <button className="btn btn-p" type="submit" disabled={submitting}>{submitting ? 'Submitting...' : 'Get early access'}</button>
+              <label style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 12, color: "var(--night-ink)" }}>
+                <input type="checkbox" required checked={termsConsent} onChange={(e) => setTermsConsent(e.target.checked)} style={{ marginTop: 2 }} />
+                I agree to the <a href="/terms" style={{ color: "inherit", textDecoration: "underline" }}>Terms of Service</a> and <a href="/privacy" style={{ color: "inherit", textDecoration: "underline" }}>Privacy Policy</a>
+              </label>
+              <button className="btn btn-p" type="submit" disabled={submitting || !termsConsent}>{submitting ? 'Submitting...' : 'Get early access'}</button>
             </>)
           )}
           </form>
         </div>
       </section>
 
+      {/* COOKIE BANNER — bubble at bottom-right, mobile responsive */}
+      {cookieConsent === null && (
+        <div
+          className="cookie-bubble"
+          style={{
+            position: "fixed",
+            bottom: 16,
+            right: 16,
+            left: 16,
+            maxWidth: 340,
+            margin: "0 auto",
+            background: "var(--bg)",
+            border: "1px solid var(--line)",
+            borderRadius: 14,
+            padding: 18,
+            zIndex: 50,
+            fontSize: 13,
+            color: "var(--ink)",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1 }}>
+            
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p style={{ margin: 0, fontSize: 13, lineHeight: 1.5, color: "var(--ink)" }}>{t.cookie.desc}</p>
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <button
+              onClick={() => setCookieConsent(true)}
+              className="btn btn-p"
+              style={{ padding: "10px 18px", fontSize: 13, flex: 1, minWidth: 110, borderRadius: 8 }}
+            >
+              {t.cookie.accept}
+            </button>
+            <button
+              onClick={() => setCookieConsent(false)}
+              style={{ padding: "10px 18px", fontSize: 13, border: "1px solid var(--line)", background: "transparent", cursor: "pointer", flex: 1, minWidth: 110, borderRadius: 8, color: "var(--ink)" }}
+            >
+              {t.cookie.decline}
+            </button>
+          </div>
+          <a
+            href="/privacy"
+            style={{ color: "var(--brand-soft)", textDecoration: "underline", fontSize: 12, textAlign: "center", display: "block", marginTop: 4 }}
+          >
+            {t.cookie.privacy}
+          </a>
+        </div>
+      )}
+
       {/* FOOTER */}
       <footer className="night" style={{ borderTop: "1px solid rgba(255,255,255,.08)" }}>
-        <div className="wrap" style={{ paddingBlock: 28, display: "grid", gap: 14, fontSize: 13, color: "var(--night-sub)" }} dir="ltr">
+        <div className="wrap" dir="ltr" style={{ paddingBlock: 28, display: "grid", gap: 14, fontSize: 13, color: "var(--night-sub)" }}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 18px" }}>
             <span style={{ fontWeight: 700 }}>Sources:</span>
             {sources.map(([n, u]) => <a key={u} href={u}>{n}</a>)}
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 12 }}>
             <span>© 2026 Saboot · Made in Pakistan</span>
+            <div style={{ display: "flex", gap: 16, fontSize: 13 }}>
+              <a href="/privacy" style={{ color: "inherit", textDecoration: "underline" }}>Privacy</a>
+              <a href="/terms" style={{ color: "inherit", textDecoration: "underline" }}>Terms</a>
+            </div>
             <span>Not affiliated with, endorsed by or integrated with Daraz, Priceoye, TCS, Leopards, PostEx or Trax.</span>
           </div>
         </div>
@@ -935,6 +1074,8 @@ export default function SabootLanding() {
         <a href="#calculator" className="btn btn-g">Calculator</a>
         <a href="#start" className="btn btn-p">{t.start}</a>
       </div>
+      </>
+    )}
     </div>
   );
 }
