@@ -1,15 +1,17 @@
 # ParcelSaboot
-> ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers.
+> ParcelSaboot records every parcel you pack and every return you open, so Pakistani online sellers can win return claims with Daraz and couriers. Continuous, timestamped packing videos and return-opening clips serve as evidence for return claims on marketplaces like Daraz and couriers like TCS, Leopards, and PostEx.
 
-ParcelSaboot is a proof-collection tool for Pakistani e-commerce sellers. It records continuous, timestamped packing videos and return-opening clips that serve as evidence for return claims on marketplaces like Daraz and couriers like TCS, Leopards, and PostEx. The site is available in English, Roman Urdu, and Roman Arabic.
+ParcelSaboot is a proof-collection tool for Pakistani e-commerce sellers. It records continuous, timestamped packing videos and return-opening clips that serve as evidence for return claims on marketplaces like Daraz and couriers like TCS, Leopards, and PostEx. The site is available in English, Roman Urdu, and Roman Arabic. Built for Daraz sellers, Instagram/WhatsApp sellers, and independent online store owners who need proof to win return and COD dispute claims.
 
 ## Primary pages
 - [Home](https://parcelsaboot.vercel.app/): Landing page explaining how ParcelSaboot helps Pakistani online sellers win return claims with video proof.
-- [How it works](https://parcelsaboot.vercel.app/): Four steps from packing table to payout — record packing, capture returns, file claims, get paid.
-- [Features](https://parcelsaboot.vercel.app/): Continuous timestamped video, item checklist, claim deadline tracking, WhatsApp alerts, private cloud storage.
-- [Calculator](https://parcelsaboot.vercel.app/): Estimate monthly losses from returns and recoverable amounts based on parcel volume.
-- [Pricing](https://parcelsaboot.vercel.app/): Free, Standard, and Growth plans with different video retention and parcel limits.
-- [FAQ](https://parcelsaboot.vercel.app/): Answers about Daraz claim acceptance, video evidence, camera requirements, storage, and parcel limits.
+- [How it works](https://parcelsaboot.vercel.app/how-it-works): Four steps from packing table to claim decision — record packing, capture returns, file claims, get paid.
+- [Features](https://parcelsaboot.vercel.app/features): Continuous timestamped video, item checklist, claim deadline tracking, WhatsApp alerts, private cloud storage.
+- [Calculator](https://parcelsaboot.vercel.app/calculator): Estimate monthly losses from returns and recoverable amounts based on parcel volume.
+- [Pricing](https://parcelsaboot.vercel.app/pricing): Free, Standard, and Growth plans with different video retention and parcel limits.
+- [FAQ](https://parcelsaboot.vercel.app/faq): Answers about Daraz claim acceptance, video evidence, camera requirements, storage, and parcel limits.
+- [Privacy](https://parcelsaboot.vercel.app/privacy): Privacy policy for ParcelSaboot users.
+- [Terms](https://parcelsaboot.vercel.app/terms): Terms of service for ParcelSaboot users.
 
 ## Optional reference
 - [Daraz return policy](https://www.daraz.pk/return-policy/): Official Daraz return policy reference.

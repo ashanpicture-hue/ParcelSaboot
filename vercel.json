@@ -1,5 +1,16 @@
 {
   "rewrites": [
+    { "source": "/how-it-works", "destination": "/" },
+    { "source": "/features", "destination": "/" },
+    { "source": "/calculator", "destination": "/" },
+    { "source": "/pricing", "destination": "/" },
+    { "source": "/faq", "destination": "/" },
+    { "source": "/privacy", "destination": "/" },
+    { "source": "/terms", "destination": "/" },
+    { "source": "/ur", "destination": "/" },
+    { "source": "/ur/", "destination": "/" },
+    { "source": "/ar", "destination": "/" },
+    { "source": "/ar/", "destination": "/" },
     { "source": "/(.*)", "destination": "/" }
   ]
 }
