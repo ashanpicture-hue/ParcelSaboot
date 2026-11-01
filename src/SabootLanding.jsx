@@ -358,6 +358,9 @@ body { background: var(--paper); margin: 0; }
 .sb .ft-bot > :last-child { justify-self: end; }
 .sb .ft-badge { display: inline-flex; background: #fff; padding: 4px 8px; border-radius: 4px; }
 .sb .ft-badge img { display: block; width: 160px; height: auto; }
+.sb .ft-badges { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+.sb .ft-badges a { display: inline-flex; }
+.sb .ft-badge-fz img { display: block; width: 200px; height: auto; }
 .sb .ft-lang { padding: 4px 12px; border: 0; border-radius: 4px; background: var(--on-deep); color: var(--deep); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
 
 /* Sticky mobile CTA */
@@ -1404,7 +1407,10 @@ export default function SabootLanding() {
                 <p className="ft-disc">Not affiliated with, endorsed by or integrated with Daraz, Priceoye, TCS, Leopards, PostEx or Trax.</p>
                 <div className="ft-bot">
                   <span>© 2026 Saboot · Made in Pakistan</span>
-                  <a className="ft-badge" href="https://www.directree.io" target="_blank" rel="noopener noreferrer"><img src="https://www.directree.io/badge/directree-badge-black.svg" alt="Verified on directree" width="200" height="37" /></a>
+                  <div className="ft-badges">
+                    <a className="ft-badge" href="https://www.directree.io" target="_blank" rel="noopener noreferrer"><img src="https://www.directree.io/badge/directree-badge-black.svg" alt="Verified on directree" width="200" height="37" /></a>
+                    <a className="ft-badge-fz" href="https://fazier.com/launches/parcelsaboot.vercel.app" target="_blank" rel="noopener"><img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&theme=light" width="250" height="54" alt="Fazier badge" loading="lazy" /></a>
+                  </div>
                   <button type="button" className="ft-lang" style={{ fontFamily: rtl ? "var(--ui)" : "var(--urdu)" }} onClick={() => setLang(rtl ? "en" : "ur")} aria-label="Switch language">{rtl ? "English" : "اردو"}</button>
                 </div>
               </div>
